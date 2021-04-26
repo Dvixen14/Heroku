@@ -22,14 +22,14 @@ app.use('/', express.static(__dirname + '/public'));
 // Connessione a MongoDB
 MongoClient.connect(url, function (err, db) {
     if (err) throw err;
-    //var db = db.db('mongochat');
+    var db = db.db('mongochat');
 
-    var dbo = db.db("mongochat");
+    /*var dbo = db.db("mongochat");
     dbo.createCollection("chats", function (err, res) {
         if (err) throw err;
         console.log("Collection created!");
         db.close();
-    });
+    });*/
 
     console.log("Connesso a MongoDB...");
 
