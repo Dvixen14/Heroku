@@ -22,6 +22,11 @@ body {
     margin-top: 1rem;
 }
 
+.scroll {
+    max-height: 100px;
+    overflow-y: auto;
+}
+
 @media (max-width: 768px) {
     #logo{
         padding-top: 1rem;
