@@ -58,6 +58,8 @@ MongoClient.connect(url, function (err, db) {
 
         // Gestione degli eventi input
         socket.on("input", function (data) {
+
+            let date = data.date;
             let name = data.name;
             let message = data.message;
 
@@ -67,7 +69,8 @@ MongoClient.connect(url, function (err, db) {
                 sendStatus("Please enter a name and message");
             } else {
                 // Inserimento messaggio
-                chat.insert({ name: name, message: message }, function () {
+                        
+                chat.insert({name: name, message: message, date: date}, function () {
                     client.emit("output", [data]);
 
                     // Send status object

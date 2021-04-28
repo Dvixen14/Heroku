@@ -73,6 +73,8 @@
                 return document.getElementById(id);
             }
 
+            
+
             // Get elemnts
             var status = element('status');
             var messages = element('messages');
@@ -110,7 +112,7 @@
                             //
                             var message = document.createElement('div');
                             message.setAttribute('class', 'chat_message');
-                            message.textContent = data[i].name+": "+data[i].message;
+                            message.textContent = data[i].date + " - " + data[i].name+": "+ data[i].message;
                             messages.appendChild(message);
                             messages.insertBefore(message, messages.firstChild);
                         }
@@ -130,9 +132,17 @@
                 });
                 // Gestione Input
                 textarea.addEventListener('keydown', function(event){
+                    var today = new Date();
+                    var dd = String(today.getDate()).padStart(2, '0');
+                    var mm = String(today.getMonth() + 1).padStart(2, '0'); //January is 0!
+                    var yyyy = today.getFullYear();
+                    
+                    today = dd + '/' + mm + '/' + yyyy;
                     if(event.which === 13 && event.shiftKey == false){
                         // Emit to server input
+                        console.log(today);
                         socket.emit('input', {
+                            date: today,
                             name:username.value,
                             message:textarea.value
                         });
