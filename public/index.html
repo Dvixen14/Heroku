@@ -133,11 +133,11 @@
                 // Gestione Input
                 textarea.addEventListener('keydown', function(event){
                     var today = new Date();
-                    var dd = String(today.getDate()).padStart(2, '0');
-                    var mm = String(today.getMonth() + 1).padStart(2, '0'); //January is 0!
-                    var yyyy = today.getFullYear();
+                    var h = String(today.getHours());
+                    var m = String(today.getMinutes());
+                    var s = today.getSeconds();
                     
-                    today = dd + '/' + mm + '/' + yyyy;
+                    today = h + '/' + m + '/' + s;
                     if(event.which === 13 && event.shiftKey == false){
                         // Emit to server input
                         console.log(today);
