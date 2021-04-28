@@ -110,11 +110,18 @@
                     if(data.length){
                         for(var i = 0; i < data.length; i++){
                             //
+                            var info = document.createElement('div');
                             var message = document.createElement('div');
                             message.setAttribute('class', 'chat_message');
-                            message.textContent = data[i].date + " - " + data[i].name+": "+ data[i].message;
+                            info.setAttribute('class', 'info');
+                            info.textContent =  data[i].date + " - " + data[i].name+": ";
+                            message.textContent =  data[i].message;
+                            
                             messages.appendChild(message);
                             messages.insertBefore(message, messages.firstChild);
+
+                            messages.appendChild(info);
+                            messages.insertBefore(info, messages.firstChild);
                         }
                     }
                 });

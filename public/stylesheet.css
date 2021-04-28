@@ -38,6 +38,10 @@ body {
     overflow-y: auto;
 }
 
+.info{
+    font-weight: bold;
+}
+
 @media (max-width: 768px) {
     #logo{
         padding-top: 1rem;
