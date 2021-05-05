@@ -59,6 +59,14 @@ body {
     font-weight: bold;
 }
 
+.btn-outline-success:hover{
+    background-color: rgb(29, 98, 74);
+}
+
+.btn-success:hover{
+    background-color: rgb(29, 98, 74);
+}
+
 
 @media (max-width: 768px) {
     #logo{
