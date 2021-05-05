@@ -1,5 +1,5 @@
 #messages {
-  height: 300px;
+  height: 500px;
 }
 
 body, html {
@@ -49,8 +49,9 @@ body {
     margin-top: 1rem;
 }
 
+
 .scroll {
-    max-height: 300px;
+    max-height: auto;
     overflow-y: auto;
 }
 
