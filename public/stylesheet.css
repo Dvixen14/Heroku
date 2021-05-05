@@ -1,6 +1,6 @@
 #messages {
-  height: 500px;
-}
+    height: 500px;
+  }
 
 body, html {
     height: 100%;
@@ -65,4 +65,8 @@ body {
         padding-top: 1rem;
         font-size:1.6rem;
     }
+
+    #messages {
+        height: 400px;
+      }
 }
