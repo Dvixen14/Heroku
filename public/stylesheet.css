@@ -1,6 +1,11 @@
+*:focus {
+    outline: none;
+}
 #messages {
     height: 500px;
   }
+
+  
 
 body, html {
     height: 100%;
@@ -9,16 +14,19 @@ body, html {
 
 body { 
     background: rgb(246, 255, 248);
-    background-repeat: no-repeat;
-    background-size: cover;
+    background-repeat: repeat;
+    background-size:auto;
+    background-image: url("sfondo.png");
 }
 
 .navbar{
-    background: rgb(255, 255, 255);
+    background: rgb(39, 55, 66);;
 }
 
 .card{
     color: rgb(39, 55, 66);
+    border-radius: 2rem;
+    border-color: rgb(47, 171, 87);
 }
 
 #messages{
@@ -29,6 +37,9 @@ body {
 #textarea{
     height: 2.5rem;
     display: inline-block;
+    border-radius: 2rem;
+    border-color: rgb(29, 98, 74);
+    outline: none;
 }
 
 #invio{
@@ -59,9 +70,6 @@ body {
     font-weight: bold;
 }
 
-.btn-outline-success:hover{
-    background-color: rgb(29, 98, 74);
-}
 
 .btn-success:hover{
     background-color: rgb(29, 98, 74);
@@ -78,3 +86,22 @@ body {
         height: 400px;
       }
 }
+
+textarea:focus, 
+textarea.form-control:focus, 
+input.form-control:focus, 
+input[type=text]:focus, 
+input[type=password]:focus, 
+input[type=email]:focus, 
+input[type=number]:focus, 
+[type=text].form-control:focus, 
+[type=password].form-control:focus, 
+[type=email].form-control:focus, 
+[type=tel].form-control:focus, 
+[contenteditable].form-control:focus {
+  box-shadow: none;
+}
+
+textarea {
+    resize: none;
+  }
