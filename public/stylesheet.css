@@ -26,6 +26,17 @@ body {
     padding: 1rem;
 }
 
+#textarea{
+    height: 2.5rem;
+    display: inline-block;
+}
+
+#invio{
+    width: 4rem;
+    text-align: center;
+    position: relative;
+}
+
 #clear{
     margin-top: 1rem;
 }
