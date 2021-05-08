@@ -1,4 +1,4 @@
-<?php 
+<?php
 
 include 'config.php';
 
@@ -7,7 +7,7 @@ session_start();
 error_reporting(0);
 
 if (isset($_SESSION['username'])) {
-    header("Location: welcome.php");
+	header("Location: welcome.php");
 }
 
 if (isset($_POST['submit'])) {
@@ -29,6 +29,7 @@ if (isset($_POST['submit'])) {
 
 <!DOCTYPE html>
 <html>
+
 <head>
 	<meta charset="utf-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -37,9 +38,41 @@ if (isset($_POST['submit'])) {
 
 	<link rel="stylesheet" type="text/css" href="style.css">
 
+	<script src="https://code.jquery.com/jquery-3.6.0.js"></script>
+	<script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/js/bootstrap.min.js"></script>
+	<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/css/bootstrap.min.css">
+
 	<title>Login Form - Pure Coding</title>
 </head>
+
 <body>
+	<nav class="navbar navbar-expand-lg navbar-dark">
+		<a id="logo" class="navbar-brand mt-auto mb-auto" href="#">
+			<img src="logo.png" width="50" height="50" class="d-inline-block align-top" alt="">
+			MongoDBChat
+		</a>
+
+		<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav">
+			&#9776;
+		</button>
+
+		<div class="collapse navbar-collapse navbar-toggleable-xs" id="navbarNav">
+			<ul class="navbar-nav mr-auto">
+				<li class="nav-item">
+					<a class="nav-link" href="#">Home</a>
+				</li>
+				<li class="nav-item  active">
+					<a class="nav-link" href="#">Chat</a>
+				</li>
+			</ul>
+
+			<form class="form-inline navbar-form float-right" method="get" action="login/login.php">
+				<button class="btn btn-outline-success ml-auto" type="submit">Login</button>
+			</form>
+		</div>
+
+	</nav>
+	
 	<div class="container">
 		<form action="" method="POST" class="login-email">
 			<p class="login-text" style="font-size: 2rem; font-weight: 800;">Login</p>
@@ -56,4 +89,5 @@ if (isset($_POST['submit'])) {
 		</form>
 	</div>
 </body>
+
 </html>
