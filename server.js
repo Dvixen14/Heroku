@@ -33,7 +33,7 @@ MongoClient.connect(url, function (err, db) {
     client.on("connection", function (socket) {
         socket.emit("output_res", res);
         let chat = db.collection("chats");
-        let users = db.collection("users");
+        //let users = db.collection("users");
         
         sendStatus = function (s) {
             socket.emit("status", s);
@@ -89,7 +89,7 @@ MongoClient.connect(url, function (err, db) {
         });
 
 
-        socket.on('submit', function(data){
+        /*socket.on('submit', function(data){
             let user = data.name;
             let pwd = data.password;
 
@@ -97,7 +97,7 @@ MongoClient.connect(url, function (err, db) {
 
                 });
             
-        });
+        });*/
     });
 });
 
