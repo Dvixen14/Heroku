@@ -36,46 +36,46 @@ if (isset($_POST['submit'])) {
 
 	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
 
-	<link rel="stylesheet" type="text/css" href="style.css">
+	<link rel="stylesheet" type="text/css" href="stylelogin.css">
 
 	<script src="https://code.jquery.com/jquery-3.6.0.js"></script>
 	<script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/js/bootstrap.min.js"></script>
 	<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/css/bootstrap.min.css">
 
-	<title>Login Form - Pure Coding</title>
+	<title>Login MongoDBChat</title>
 </head>
 
 <body>
-	<nav class="navbar navbar-expand-lg navbar-dark">
-		<a id="logo" class="navbar-brand mt-auto mb-auto" href="#">
-			<img src="logo.png" width="50" height="50" class="d-inline-block align-top" alt="">
-			MongoDBChat
-		</a>
+	<header>
+		<nav class="navbar navbar-expand-lg navbar-dark">
+			<a id="logo" class="navbar-brand mt-auto mb-auto" href="#">
+				<img src="logo.png" width="50" height="50" class="d-inline-block align-top" alt="">
+				MongoDBChat
+			</a>
 
-		<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav">
-			&#9776;
-		</button>
+			<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav">
+				&#9776;
+			</button>
 
-		<div class="collapse navbar-collapse navbar-toggleable-xs" id="navbarNav">
-			<ul class="navbar-nav mr-auto">
-				<li class="nav-item">
-					<a class="nav-link" href="#">Home</a>
-				</li>
-				<li class="nav-item  active">
-					<a class="nav-link" href="#">Chat</a>
-				</li>
-			</ul>
+			<div class="collapse navbar-collapse navbar-toggleable-xs" id="navbarNav">
+				<ul class="navbar-nav mr-auto">
+					<li class="nav-item">
+						<a class="nav-link" href="#">Home</a>
+					</li>
+					<li class="nav-item">
+						<a class="nav-link" href="index.html">Chat</a>
+					</li>
+				</ul>
 
-			<form class="form-inline navbar-form float-right" method="get" action="login/login.php">
-				<button class="btn btn-outline-success ml-auto" type="submit">Login</button>
-			</form>
-		</div>
-
-	</nav>
-	
+				<form class="form-inline navbar-form float-right" method="get" action="login.php">
+					<button class="btn btn-outline-success ml-auto" type="submit">Login</button>
+				</form>
+			</div>
+		</nav>
+	</header>
 	<div class="container">
 		<form action="" method="POST" class="login-email">
-			<p class="login-text" style="font-size: 2rem; font-weight: 800;">Login</p>
+			<p class="login-text" style="font-size: 2rem; font-weight: 600;">Login</p>
 			<div class="input-group">
 				<input type="email" placeholder="Email" name="email" value="<?php echo $email; ?>" required>
 			</div>

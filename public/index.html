@@ -15,33 +15,34 @@
 </head>
 
 <body>
-    <nav class="navbar navbar-expand-lg navbar-dark">
-        <a id="logo" class="navbar-brand mt-auto mb-auto" href="#">
-            <img src="logo.png" width="50" height="50" class="d-inline-block align-top" alt="">
-            MongoDBChat
-        </a>
+    <header>
+        <nav class="navbar navbar-expand-lg navbar-dark">
+            <a id="logo" class="navbar-brand mt-auto mb-auto" href="#">
+                <img src="logo.png" width="50" height="50" class="d-inline-block align-top" alt="">
+                MongoDBChat
+            </a>
 
-        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav">
-            &#9776;
-        </button>
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav">
+                &#9776;
+            </button>
 
-        <div class="collapse navbar-collapse navbar-toggleable-xs" id="navbarNav">
-            <ul class="navbar-nav mr-auto">
-                <li class="nav-item">
-                    <a class="nav-link" href="#">Home</a>
-                </li>
-                <li class="nav-item  active">
-                    <a class="nav-link" href="#">Chat</a>
-                </li>
-            </ul>
+            <div class="collapse navbar-collapse navbar-toggleable-xs" id="navbarNav">
+                <ul class="navbar-nav mr-auto">
+                    <li class="nav-item">
+                        <a class="nav-link" href="#">Home</a>
+                    </li>
+                    <li class="nav-item  active">
+                        <a class="nav-link" href="#">Chat</a>
+                    </li>
+                </ul>
 
-            <form class="form-inline navbar-form float-right" method="get" action="login.php">
-                <button class="btn btn-outline-success ml-auto" type="submit">Login</button>
-            </form>
-        </div>
+                <form class="form-inline navbar-form float-right" method="get" action="login.php">
+                    <button class="btn btn-outline-success ml-auto" type="submit">Login</button>
+                </form>
+            </div>
 
-    </nav>
-
+        </nav>
+    </header>
     <div class="container">
         <div class="row">
             <div class="col-md-6 offset-md-3 col-sm-12">
@@ -61,8 +62,7 @@
                     <div class="form-group d-flex justify-content-center">
                         <textarea class="form-control mx-2" id="textarea" cols="30" rows="10"
                             placeholder="Inserisci messaggio..."></textarea>
-                        <button type="submit" id="invio"
-                            class="btn btn-success align-self-end mx-2">Invio</button>
+                        <button type="submit" id="invio" class="btn btn-success align-self-end mx-2">Invio</button>
                     </div>
 
                 </div>
@@ -150,15 +150,15 @@
                     var h = today.toLocaleString();
 
                     today = h;
-                        // Emit to server input
-                        console.log(today);
-                        socket.emit('input', {
-                            date: today,
-                            name: username.value,
-                            message: textarea.value
-                        });
+                    // Emit to server input
+                    console.log(today);
+                    socket.emit('input', {
+                        date: today,
+                        name: username.value,
+                        message: textarea.value
+                    });
 
-                        event.preventDefault();
+                    event.preventDefault();
                 });
 
 
