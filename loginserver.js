@@ -8,7 +8,7 @@ const server = http.createServer(app);
 app.set('view-engine', 'ejs')
 
 app.get('/', (req, res) =>{
-    res.render('index.ejs', { name: "Davide"})
+    res.render('index.ejs', { name: 'Davide'})
 })
 
 server.listen(port, () => {
