@@ -13,19 +13,15 @@ const client = require("socket.io")(server, {
 
 var url = "mongodb+srv://Davide:Y8jM2TdXWRs6aqZ@testcluster1.1p780.mongodb.net/mongochat";
 
-/*app.get('/', (req, res) => {
-    res.sendFile(__dirname + '/index.html');
-  });*/
-
 app.use('/', express.static(__dirname + '/public'));
 
 // Connessione a MongoDB
 MongoClient.connect(url, function (err, db) {
     if (err) throw err;
-    var db = db.db('mongochat');
+   var db = db.db('mongochat');
 
     /*var dbo = db.db("mongochat");
-    dbo.createCollection("chats", function (err, res) {
+    dbo.createCollection("users", function (err, res) {
         if (err) throw err;
         console.log("Collection created!");
         db.close();
@@ -37,9 +33,9 @@ MongoClient.connect(url, function (err, db) {
     client.on("connection", function (socket) {
         
         let chat = db.collection("chats");
+        
         sendStatus = function (s) {
             socket.emit("status", s);
-            
         };
 
         // Chat dalla collection su MongoDB
@@ -88,6 +84,15 @@ MongoClient.connect(url, function (err, db) {
             chat.remove({}, function () {
                 // Emit cleared
                 socket.emit("cleared");
+            });
+        });
+
+        let users = db.collection("users");
+        socket.on('submit', function(data){
+            let user = data.name;
+            let pwd = data.password;
+            users.insert({username: user, password: pwd}, function(){
+                console.log("Nuovo utente loggato come: " + user);
             });
         });
     });
