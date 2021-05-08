@@ -93,13 +93,9 @@ MongoClient.connect(url, function (err, db) {
             let user = data.name;
             let pwd = data.password;
 
-            if(user == "" || pwd == ""){
-                console.log("Campi inseriti vuoti")
-            }else{
                 users.insert({username: user, password: pwd}, function(){
 
                 });
-            }
             
         });
     });

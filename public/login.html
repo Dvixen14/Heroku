@@ -79,12 +79,12 @@
 		if (socket !== undefined) {
 			console.log(socket);
 			console.log('Connesso al socket...');
+			
 			invio.addEventListener('click', function(){ 
 				socket.emit('submit', {
 					name: username.value,
 					password: password.value
 				});
-				console.log(username.value);
 			})
 
 		}
