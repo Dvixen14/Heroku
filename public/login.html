@@ -79,10 +79,6 @@
 		if (socket !== undefined) {
 			console.log(socket);
 			console.log('Connesso al socket...');
-			if(user == "" || pwd == "")
-				{
-
-				}
 			invio.addEventListener('click', function(){ 
 				socket.emit('submit', {
 					name: username.value,
