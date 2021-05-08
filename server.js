@@ -19,6 +19,12 @@ var url = "mongodb+srv://Davide:Y8jM2TdXWRs6aqZ@testcluster1.1p780.mongodb.net/m
 
 app.use('/', express.static(__dirname + '/public'));
 
+app.set('view-engine', 'ejs')
+
+app.get('/  ', (req, res) =>{
+    res.render('index.ejs', { name: 'Davide'})
+})
+
 // Connessione a MongoDB
 MongoClient.connect(url, function (err, db) {
     if (err) throw err;
