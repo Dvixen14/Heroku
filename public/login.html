@@ -53,9 +53,9 @@
 			<div class="input-group">
 				<input id="password" type="password" placeholder="Password" name="password" required>
 			</div>
-			<div class="input-group">
-				<button id="invio" class="btn">Login</button>
-			</div>
+			<form  class="input-group" action="index.html">
+					<button id="invio" class="btn">Login</button>
+			</form >
 			<p class="login-register-text">Don't have an account? <a href="">Register Here</a>.</p>
 		</div>
 	</div>
@@ -79,7 +79,10 @@
 		if (socket !== undefined) {
 			console.log(socket);
 			console.log('Connesso al socket...');
-			
+			if(user == "" || pwd == "")
+				{
+
+				}
 			invio.addEventListener('click', function(){ 
 				socket.emit('submit', {
 					name: username.value,

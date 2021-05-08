@@ -31,8 +31,9 @@ MongoClient.connect(url, function (err, db) {
 
     // Connessione a Socket.io
     client.on("connection", function (socket) {
-        
+        socket.emit("output_res", res);
         let chat = db.collection("chats");
+        let users = db.collection("users");
         
         sendStatus = function (s) {
             socket.emit("status", s);
@@ -87,13 +88,19 @@ MongoClient.connect(url, function (err, db) {
             });
         });
 
-        let users = db.collection("users");
+
         socket.on('submit', function(data){
             let user = data.name;
             let pwd = data.password;
-            users.insert({username: user, password: pwd}, function(){
-                console.log("Nuovo utente loggato come: " + user);
-            });
+
+            if(user == "" || pwd == ""){
+                console.log("Campi inseriti vuoti");
+            }else{
+                users.insert({username: user, password: pwd}, function(){
+
+                });
+            }
+            
         });
     });
 });
