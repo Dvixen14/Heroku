@@ -89,7 +89,7 @@ MongoClient.connect(url, function (err, db) {
         });
 
 
-        socket.on('submit', function(data){
+        /*socket.on('submit', function(data){
             let user = data.name;
             let pwd = data.password;
 
@@ -97,7 +97,7 @@ MongoClient.connect(url, function (err, db) {
 
                 });
             
-        });
+        });*/
     });
 });
 
