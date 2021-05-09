@@ -107,7 +107,7 @@
             }
 
             // Connessione a socket.io
-            var socket = io.connect('http://mongodbchatinfo.herokuapp.com', {transports: ['websocket'], secure: true});
+            var socket = io.connect('https://mongodbchatinfo.herokuapp.com', {transports: ['websocket'], secure: true});
             
             // Controlla per la connessione
             if (socket !== undefined) {
