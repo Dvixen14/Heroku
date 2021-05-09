@@ -31,7 +31,7 @@ MongoClient.connect(url, function (err, db) {
 
     // Connessione a Socket.io
     client.on("connection", function (socket) {
-        socket.emit("output_res", res);
+        //socket.emit("output_res", res);
         let chat = db.collection("chats");
         //let users = db.collection("users");
         
