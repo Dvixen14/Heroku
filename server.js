@@ -15,11 +15,6 @@ var url = "mongodb+srv://Davide:Y8jM2TdXWRs6aqZ@testcluster1.1p780.mongodb.net/m
 
 app.use('/', express.static(__dirname + '/public'));
 
-app.set("views", express.static(__dirname, "/views"));
-
-app.get("/login.html", (req, res) =>{
-    res.render("login.html");
-})
 
 // Connessione a MongoDB
 MongoClient.connect(url, function (err, db) {
