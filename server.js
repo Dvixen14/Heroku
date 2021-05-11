@@ -92,7 +92,7 @@ MongoClient.connect(url, function (err, db) {
             let pwd = data.password;
 
                 users.insert({username: user, password: pwd}, function(){
-                    client.emit("output", [data]);
+                    console.log("utente registrato...");
                 });
             
         });
@@ -100,5 +100,5 @@ MongoClient.connect(url, function (err, db) {
 });
 
 server.listen(port, () => {
-    console.log('listening on *:3000');
+    console.log('listening on *:8000');
 });
