@@ -89,7 +89,7 @@ MongoClient.connect(url, function (err, db) {
         });
 
         socket.on('submit_register', function(data){
-            let user = data.name;
+            let user = data.username;
             let mail = data.email;
             let pwd = data.password;
 
