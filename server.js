@@ -88,15 +88,17 @@ MongoClient.connect(url, function (err, db) {
             });
         });
 
-        socket.on('submit', function(data){
+        socket.on('submit_register', function(data){
             let user = data.name;
+            let mail = data.email;
             let pwd = data.password;
 
-                users.insert({username: user, password: pwd}, function(){
+                users.insert({username: user, email: mail, password: pwd}, function(){
                     console.log("utente registrato...");
                 });
-            
         });
+
+
     });
 });
 
