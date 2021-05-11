@@ -98,6 +98,15 @@ MongoClient.connect(url, function (err, db) {
                 });
         });
 
+        socket.on('submit_login', function(data){
+            let user = data.name;
+            let pwd = data.password;
+
+                users.insert({username: user, email: mail, password: pwd}, function(){
+                    console.log("utente registrato...");
+                });
+        });
+
 
     });
 });
