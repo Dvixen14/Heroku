@@ -28,16 +28,19 @@ body {
 }
 
 .card {
-  color: rgb(39, 55, 66);
+  color: rgb(255, 255, 255);
   border-radius: 40px;
-  border: 2px solid rgb(47, 171, 87);
+  border: 2px solid rgb(29, 98, 74);
   padding: 1.5rem;
 }
 
 #messages {
-  font-size: large;
+  font-size: 1.2rem;
 
 }
+
+
+  
 
 #textarea {
   height: 2.8rem;
@@ -50,7 +53,7 @@ body {
   background: #fff;
   outline: none;
   transition: 0.3s;
-  margin-right: 20px;
+  margin-right: 10px;
 }
 
 #textarea:focus {
@@ -61,6 +64,18 @@ body {
   margin-right: 4px;
   filter: invert(100%);
 }
+
+.messaggio{
+    margin-bottom: 10px;
+    background-color: rgb(29, 98, 74);
+    padding: 15px;
+    border-radius: 40px;
+
+}
+
+.messaggio:nth-child(odd) {
+    background: rgb(32, 138, 65);
+  }
 
 #invio {
   height: 45px;
