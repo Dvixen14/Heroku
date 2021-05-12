@@ -79,8 +79,13 @@ body {
   background-color: rgb(29, 98, 74);
 }
 
+#invio:active {
+	transform: scale(1.1);
+	transition: .1s;
+}
+
 #clear {
-  margin-top: 1rem;
+  margin-top: 0.5rem;
 }
 
 #logo {

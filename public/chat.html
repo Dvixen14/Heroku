@@ -1,0 +1,188 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/css/bootstrap.min.css">
+    <link rel="stylesheet" href="stylesheet.css">
+    <script src="https://code.jquery.com/jquery-3.6.0.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/js/bootstrap.min.js"></script>
+
+    <title>MongoChat</title>
+
+</head>
+
+<body>
+    <header>
+
+        <nav class="navbar navbar-expand-lg navbar-dark">
+            <a id="logo" class="navbar-brand mt-auto mb-auto" href="#">
+                <img src="logo.png" width="50" height="50" class="d-inline-block align-top" alt="">
+                MongoDBChat
+            </a>
+
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav">
+                &#9776;
+            </button>
+
+            <div class="collapse navbar-collapse navbar-toggleable-xs" id="navbarNav">
+                <ul class="navbar-nav mr-auto">
+                    <li class="nav-item">
+                        <a class="nav-link" href="index.html">Home</a>
+                    </li>
+                    <li class="nav-item  active">
+                        <a class="nav-link" href="chat.html">Chat</a>
+                    </li>
+                </ul>
+
+                <form class="form-inline navbar-form float-right" method="get" action="login.html">
+                    <button class="btn btn-outline-success ml-auto" type="submit">Login</button>
+                </form>
+            </div>
+
+        </nav>
+
+        <body>
+    </header>
+    <div class="container">
+        <div class="row">
+            <div class="col-md-6 offset-md-3 col-sm-12">
+                <h1 style="color: rgb(39, 55, 66); font-size: 4rem;" class="text-center">
+                    Chat
+                </h1>
+                <div id="status"></div>
+                <div id="chat">
+                    <div id="utente" class="card-block scroll">
+
+                    </div>
+                    <input type="text" id="username" class="form-control" placeholder="Inserisci username....">
+                    <br>
+                    <div class="card">
+                        <div id="messages" class="card-block scroll">
+
+                        </div>
+                    </div>
+                    <br>
+                    <div class="form-group d-flex justify-content-center align-middle">
+                        <textarea class="form-control mx-2" id="textarea" cols="30" rows="10"
+                            placeholder="Inserisci messaggio..."></textarea>
+                        <button type="submit" id="invio" class="align-self-end">
+                            <img id="send" src="paper-plane.png" width="25" height="25" alt="submit" />
+                        </button>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+        <button id="clear" class="btn btn-danger mx-auto d-block">Clear</button>
+    </div>
+</body>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/4.0.1/socket.io.js"></script>
+<script>
+    (function () {
+        var element = function (id) {
+            return document.getElementById(id);
+        }
+
+
+        // Get elemnts
+        var status = element('status');
+        var messages = element('messages');
+        var textarea = element('textarea');
+        var invio = element('invio');
+        var username = element('username');
+        var utente = element('utente');
+        var clearBtn = element('clear');
+
+        // Stati di default
+        var statusDefault = status.textContent;
+
+        var setStatus = function (s) {
+            // Set status
+            status.textContent = s;
+
+            if (s !== statusDefault) {
+                var delay = setTimeout(function () {
+                    setStatus(statusDefault);
+                }, 4000);
+            }
+        }
+
+        // Connessione a socket.io
+        var socket = io.connect('https://mongodbchatinfo.herokuapp.com', { transports: ['websocket'], secure: true });
+
+        // Controlla per la connessione
+        if (socket !== undefined) {
+            console.log(socket);
+            console.log('Connesso al socket...');
+
+            // Gestione Output
+            socket.on('output', function (data) {
+                console.log(data)
+                if (data.length) {
+                    for (var i = 0; i < data.length; i++) {
+                        //
+                        var info = document.createElement('div');
+                        var message = document.createElement('div');
+                        message.setAttribute('class', 'chat_message');
+                        info.setAttribute('class', 'info');
+                        info.textContent = data[i].date + " - " + data[i].name + ": ";
+                        message.textContent = data[i].message;
+
+                        messages.appendChild(message);
+                        messages.insertBefore(message, messages.firstChild);
+
+                        messages.appendChild(info);
+                        messages.insertBefore(info, messages.firstChild);
+                    }
+                }
+            });
+
+            // Get status dal server
+            socket.on('status', function (data) {
+                // Get message status
+                setStatus((typeof data === 'object') ? data.message : data);
+
+                // If status is clear, clear text
+                if (data.clear) {
+                    textarea.value = '';
+                }
+
+            });
+            // Gestione Input
+
+            invio.addEventListener('click', function () {
+                var today = new Date();
+                var h = today.toLocaleString();
+
+                today = h;
+                // Emit to server input
+                console.log(today);
+                socket.emit('input', {
+                    date: today,
+                    name: username.value,
+                    message: textarea.value
+                });
+
+                event.preventDefault();
+            });
+
+
+
+            // Gestione clear chat
+            clearBtn.addEventListener('click', function () {
+                socket.emit('clear')
+            });
+
+            socket.on('cleared', function () {
+                messages.textContent = '';
+            });
+        }
+    })();
+</script>
+</body>
+
+</html>
