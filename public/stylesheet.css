@@ -168,9 +168,17 @@ textarea {
   }
 }
 
+@media (max-width: 1680px) {
+    #messages {
+        height: 400px;
+    }
+  }
+
+  
 @media (max-width: 1440px) {
     #messages {
         height: 350px;
     }
   }
+  
   
