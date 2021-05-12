@@ -45,18 +45,22 @@
 		</nav>
 	</header>
 	<div class="container">
-		<div class="login-email">
-			<p class="login-text" style="font-size: 2rem; font-weight: 600;">Login </p>
-			<div class="input-group">
-				<input id="email" type="email" placeholder="Email" name="email" required>
+		<div class="row">
+			<div class="col-md-6 offset-md-3">
+				<div class="login-email">
+					<p class="login-text" style="font-size: 2rem; font-weight: 600;">Login </p>
+					<div class="input-group">
+						<input id="email" type="email" placeholder="Email" name="email" required>
+					</div>
+					<div class="input-group">
+						<input id="password" type="password" placeholder="Password" name="password" required>
+					</div>
+					<form class="input-group" action="index.html">
+						<button id="invio" class="btn">Login</button>
+					</form>
+					<p class="login-register-text">Don't have an account? <a href="register.html">Register Here</a>.</p>
+				</div>
 			</div>
-			<div class="input-group">
-				<input id="password" type="password" placeholder="Password" name="password" required>
-			</div>
-			<form class="input-group" action="index.html">
-					<button id="invio" class="btn">Login</button>
-			</form >
-			<p class="login-register-text">Don't have an account? <a href="register.html">Register Here</a>.</p>
 		</div>
 	</div>
 </body>
@@ -79,8 +83,8 @@
 		if (socket !== undefined) {
 			console.log(socket);
 			console.log('Connesso al socket...');
-			
-			invio.addEventListener('click', function(){ 
+
+			invio.addEventListener('click', function () {
 				socket.emit('submit_login', {
 					name: email.value,
 					password: password.value
