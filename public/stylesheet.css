@@ -37,7 +37,6 @@ body {
 #messages {
   font-size: large;
 
-  
 }
 
 #textarea {
@@ -64,7 +63,7 @@ body {
 
 #invio {
   height: 45px;
-  width: 50px;
+  width: 52px;
   border-radius: 50%;
   text-align: center;
   position: relative;
