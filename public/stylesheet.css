@@ -31,11 +31,13 @@ body {
   color: rgb(39, 55, 66);
   border-radius: 40px;
   border: 2px solid rgb(47, 171, 87);
+  padding: 1.5rem;
 }
 
 #messages {
   font-size: large;
-  padding: 1rem;
+
+  
 }
 
 #textarea {
