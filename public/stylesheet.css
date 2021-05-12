@@ -1,5 +1,5 @@
 @import url("https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap");
-
+/*------ GENERAL ------*/
 * {
   margin: 0;
   padding: 0;
@@ -23,8 +23,40 @@ body {
   background-size: auto;
 }
 
+textarea:focus,
+textarea.form-control:focus,
+input.form-control:focus,
+input[type="text"]:focus,
+input[type="password"]:focus,
+input[type="email"]:focus,
+input[type="number"]:focus,
+[type="text"].form-control:focus,
+[type="password"].form-control:focus,
+[type="email"].form-control:focus,
+[type="tel"].form-control:focus,
+[contenteditable].form-control:focus {
+  box-shadow: none;
+}
+
+textarea {
+  resize: none;
+}
+
+/*------ NAVBAR ------*/
 .navbar {
   background: rgb(39, 55, 66);
+}
+
+#logo {
+  font-size: 2rem;
+}
+
+/*----------------------------*/
+
+/*------ CONTAINER CHAT ------*/
+.container {
+  height: fit-content;
+  margin-top: 1rem;
 }
 
 .card {
@@ -36,11 +68,7 @@ body {
 
 #messages {
   font-size: 1.2rem;
-
 }
-
-
-  
 
 #textarea {
   height: 2.8rem;
@@ -65,26 +93,6 @@ body {
   filter: invert(100%);
 }
 
-.messaggio{
-    position: relative;
-    margin-bottom: 10px;
-    background-color: rgb(29, 98, 74);
-    padding: 15px;
-    border-radius: 10px;
-    padding-bottom: 25px;
-
-}
-
-.data{
-    position: absolute;
-    right: 10px;
-    font-size: small;
-}
-
-.messaggio:nth-child(odd) {
-    background: rgb(32, 138, 65);
-  }
-
 #invio {
   height: 45px;
   width: 52px;
@@ -104,29 +112,45 @@ body {
 }
 
 #invio:active {
-	transform: scale(1.1);
-	transition: .1s;
+  transform: scale(1.1);
+  transition: 0.1s;
+}
+
+/*----------------------------*/
+
+/*------ MESSAGGI ------*/
+
+.messaggio {
+  position: relative;
+  margin-bottom: 16px;
+  background-color: rgb(29, 98, 74);
+  padding: 15px;
+  border-radius: 10px;
+  padding-bottom: 25px;
+}
+
+.data {
+  position: absolute;
+  right: 15px;
+  font-size: small;
+}
+
+.info {
+  font-weight: bold;
+  margin-bottom: 10px;
+}
+
+.messaggio:nth-child(odd) {
+  background: rgb(32, 138, 65);
 }
 
 #clear {
   margin-top: 0.5rem;
 }
 
-#logo {
-  font-size: 2rem;
-}
-
-.container {
-  margin-top: 1rem;
-}
-
 .scroll {
   max-height: auto;
   overflow-y: auto;
-}
-
-.info {
-  font-weight: bold;
 }
 
 .btn-success:hover {
@@ -144,21 +168,9 @@ body {
   }
 }
 
-textarea:focus,
-textarea.form-control:focus,
-input.form-control:focus,
-input[type="text"]:focus,
-input[type="password"]:focus,
-input[type="email"]:focus,
-input[type="number"]:focus,
-[type="text"].form-control:focus,
-[type="password"].form-control:focus,
-[type="email"].form-control:focus,
-[type="tel"].form-control:focus,
-[contenteditable].form-control:focus {
-  box-shadow: none;
-}
-
-textarea {
-  resize: none;
-}
+@media (max-width: 1440px) {
+    #messages {
+        height: 350px;
+    }
+  }
+  
