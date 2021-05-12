@@ -128,10 +128,12 @@
                         var node = document.createElement('div');
                         var info = document.createElement('div');
                         var message = document.createElement('div');
+
+                        var objDiv = document.getElementById('messages');
+
                         node.setAttribute('class', 'intero');
                         message.setAttribute('class', 'chat_message');
                         info.setAttribute('class', 'info');
-                        
                         
                         info.textContent = data[i].date + " - " + data[i].name + ": ";
                         message.textContent = data[i].message;
@@ -140,7 +142,7 @@
                         node.appendChild(message);
 
                         messages.appendChild(node);
-
+                        objDiv.scrollTop = objDiv.scrollHeight;
 
                     }
                 }
