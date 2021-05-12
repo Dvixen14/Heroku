@@ -50,6 +50,7 @@ body {
   background: #fff;
   outline: none;
   transition: 0.3s;
+  margin-right: 20px;
 }
 
 #textarea:focus {
@@ -57,7 +58,7 @@ body {
 }
 
 #send {
-  margin-right: 3px;
+  margin-right: 4px;
   filter: invert(100%);
 }
 

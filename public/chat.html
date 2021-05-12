@@ -48,7 +48,7 @@
     </header>
     <div class="container">
         <div class="row">
-            <div class="col-md-6 offset-md-3 col-sm-12">
+            <div class="col-md-8 offset-md-2 col-sm-12">
                 <h1 style="color: rgb(39, 55, 66); font-size: 4rem;" class="text-center">
                     Chat
                 </h1>
@@ -66,7 +66,7 @@
                     </div>
                     <br>
                     <div class="form-group d-flex justify-content-center align-middle">
-                        <textarea class="form-control mx-2" id="textarea" cols="30" rows="10"
+                        <textarea class="form-control" id="textarea" cols="30" rows="10"
                             placeholder="Inserisci messaggio..."></textarea>
                         <button type="submit" id="invio" class="align-self-end">
                             <img id="send" src="paper-plane.png" width="25" height="25" alt="submit" />
@@ -131,7 +131,7 @@
 
                         var objDiv = document.getElementById('messages');
 
-                        node.setAttribute('class', 'intero');
+                        node.setAttribute('class', 'messaggio');
                         message.setAttribute('class', 'chat_message');
                         info.setAttribute('class', 'info');
                         
