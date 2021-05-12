@@ -127,6 +127,7 @@
                         //
                         var node = document.createElement('div');
                         var info = document.createElement('div');
+                        var date = document.createElement('div');
                         var message = document.createElement('div');
 
                         var objDiv = document.getElementById('messages');
@@ -134,12 +135,15 @@
                         node.setAttribute('class', 'messaggio');
                         message.setAttribute('class', 'chat_message');
                         info.setAttribute('class', 'info');
+                        date.setAttribute('class', 'data');
                         
-                        info.textContent = data[i].date + " - " + data[i].name + ": ";
+                        info.textContent =  data[i].name + ": ";
+                        date.textContent = data[i].date;
                         message.textContent = data[i].message;
 
                         node.appendChild(info);
                         node.appendChild(message);
+                        node.appendChild(date);
 
                         messages.appendChild(node);
                         objDiv.scrollTop = objDiv.scrollHeight;

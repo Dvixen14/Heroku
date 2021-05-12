@@ -66,11 +66,19 @@ body {
 }
 
 .messaggio{
+    position: relative;
     margin-bottom: 10px;
     background-color: rgb(29, 98, 74);
     padding: 15px;
-    border-radius: 40px;
+    border-radius: 10px;
+    padding-bottom: 25px;
 
+}
+
+.data{
+    position: absolute;
+    right: 10px;
+    font-size: small;
 }
 
 .messaggio:nth-child(odd) {
