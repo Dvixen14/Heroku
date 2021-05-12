@@ -1,11 +1,22 @@
 @import url("https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap");
 /*------ GENERAL ------*/
+:root {
+    --primary: #273742;
+    --secondary: #1C5F6C;
+    --medium: #058985;
+    --light: #46B388;
+    --super-light: #97D97C;
+    --yell: #F9F871;
+  }
+
+
 * {
   margin: 0;
   padding: 0;
   box-sizing: border-box;
   font-family: "Poppins", sans-serif;
 }
+
 
 #messages {
   height: 500px;
@@ -14,7 +25,7 @@
 body,
 html {
   height: 100%;
-  color: rgb(39, 55, 66);
+  color: var(--primary);
 }
 
 body {
@@ -44,7 +55,7 @@ textarea {
 
 /*------ NAVBAR ------*/
 .navbar {
-  background: rgb(39, 55, 66);
+  background: var(--primary);
 }
 
 #logo {
@@ -62,7 +73,7 @@ textarea {
 .card {
   color: rgb(255, 255, 255);
   border-radius: 30px;
-  border: 2px solid rgb(29, 98, 74);
+  border: 2px solid var(--secondary);
   padding: 1rem;
   /*box-shadow: INSET 0px 0px 10px rgb(39, 55, 66);*/
 }
@@ -77,7 +88,7 @@ textarea {
   display: inline-block;
   margin-top: auto;
   margin-bottom: auto;
-  border: 2px solid #e7e7e7;
+  border: 2px solid var(--light);
   border-radius: 40px;
   background: #fff;
   outline: none;
@@ -86,7 +97,7 @@ textarea {
 }
 
 #textarea:focus {
-  border-color: rgb(47, 171, 87);
+  border-color: var(--medium);
 }
 
 #send {
@@ -103,13 +114,13 @@ textarea {
   padding: 0;
   border: none;
   background: none;
-  background-color: rgb(47, 171, 87);
+  background-color: var(--light);
   border-radius: 100%;
   transition: 0.3s;
 }
 
 #invio:hover {
-  background-color: rgb(29, 98, 74);
+  background-color: var(--medium);
 }
 
 #invio:active {
@@ -124,12 +135,12 @@ textarea {
 .messaggio {
   position: relative;
   margin-bottom: 16px;
-  background-color: rgb(29, 98, 74);
+  background-color: var(--secondary);
   padding: 15px;
   border-radius: 10px;
   padding-bottom: 25px;
-  text-shadow: 0px 0px 3px rgb(39, 55, 66);
-  box-shadow: INSET 0px 0px 10px rgb(39, 55, 66);
+  text-shadow: 0px 0px 3px var(--primary);
+  box-shadow: INSET 0px 0px 10px var(--primary);
 }
 
 .data {
@@ -144,7 +155,7 @@ textarea {
 }
 
 .messaggio:nth-child(odd) {
-  background: rgb(39, 55, 66) /*rgb(47, 171, 87)*/;
+  background: var(--primary) /*rgb(47, 171, 87)*/;
 }
 
 #clear {
@@ -157,7 +168,7 @@ textarea {
 }
 
 .btn-success:hover {
-  background-color: rgb(29, 98, 74);
+  background-color: var(--secondary);
 }
 
 @media (max-width: 768px) {
@@ -184,4 +195,13 @@ textarea {
     }
   }
   
-  
+  .btn-outline-success{
+    color: var(--light);
+    border-color: var(--light);
+}
+
+.btn-outline-success:hover{
+    background-color: var(--light);
+    border-color: var(--light);
+    
+}
