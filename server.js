@@ -43,7 +43,7 @@ MongoClient.connect(url, function (err, db) {
         chat
             .find()
             .limit(100)
-            .sort({ id: -1 })
+            .sort({ _id: desc })
             .toArray(function (err, res) {
                 //check for errors
                 if (err) {
