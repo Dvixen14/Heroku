@@ -125,18 +125,23 @@
                 if (data.length) {
                     for (var i = 0; i < data.length; i++) {
                         //
+                        var node = document.createElement('div');
                         var info = document.createElement('div');
                         var message = document.createElement('div');
+                        node.setAttribute('class', 'intero');
                         message.setAttribute('class', 'chat_message');
                         info.setAttribute('class', 'info');
+                        
+                        
                         info.textContent = data[i].date + " - " + data[i].name + ": ";
                         message.textContent = data[i].message;
 
-                        messages.appendChild(message);
-                        messages.insertBefore(message, messages.firstChild);
+                        node.appendChild(info);
+                        node.appendChild(message);
 
-                        messages.appendChild(info);
-                        messages.insertBefore(info, messages.firstChild);
+                        messages.appendChild(node);
+
+
                     }
                 }
             });
