@@ -1,111 +1,127 @@
-@import url('https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');
+@import url("https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap");
 
 * {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-    font-family: 'Poppins', sans-serif;
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: "Poppins", sans-serif;
 }
 
 #messages {
-    height: 500px;
+  height: 500px;
 }
 
-body, html {
-    height: 100%;
-    color: rgb(39, 55, 66);
+body,
+html {
+  height: 100%;
+  color: rgb(39, 55, 66);
 }
 
-body { 
-    background: rgb(246, 255, 248);
-    background-repeat: repeat;
-    background-size:auto;
-
+body {
+  background: rgb(246, 255, 248);
+  background-repeat: repeat;
+  background-size: auto;
 }
 
-.navbar{
-    background: rgb(39, 55, 66);;
+.navbar {
+  background: rgb(39, 55, 66);
 }
 
-.card{
-    color: rgb(39, 55, 66);
-    border-radius: 2rem;
-    border-color: rgb(47, 171, 87);
+.card {
+  color: rgb(39, 55, 66);
+  border-radius: 40px;
+  border: 2px solid rgb(47, 171, 87);
 }
 
-#messages{
-    font-size: large;
-    padding: 1rem;
+#messages {
+  font-size: large;
+  padding: 1rem;
 }
 
-#textarea{
-    height: 2.5rem;
-    display: inline-block;
-    border-radius: 2rem;
-    border-color: rgb(29, 98, 74);
-    outline: none;
+#textarea {
+  height: 2.8rem;
+  display: inline-block;
+  margin-top: auto;
+  margin-bottom: auto;
+  border: 2px solid #e7e7e7;
+  border-radius: 40px;
+  background: #fff;
+  outline: none;
+  transition: 0.3s;
 }
 
-#invio{
-    width: 4rem;
-    text-align: center;
-    position: relative;
+#textarea:focus {
+  border-color: rgb(47, 171, 87);
 }
 
-#clear{
-    margin-top: 1rem;
+#send{
+    margin-right: 4px;
+    filter: invert(100%);
 }
 
-#logo{
-    font-size:2rem;
+#invio {
+  height: 3rem;
+  width: 3.5rem;
+  text-align: center;
+  position: relative;
+  padding: 0;
+  border: none;
+  background: none;
+  background-color:rgb(47, 171, 87) ;
+  border-radius: 100%;
 }
 
-.container{
-    margin-top: 1rem;
+#clear {
+  margin-top: 1rem;
 }
 
+#logo {
+  font-size: 2rem;
+}
+
+.container {
+  margin-top: 1rem;
+}
 
 .scroll {
-    max-height: auto;
-    overflow-y: auto;
+  max-height: auto;
+  overflow-y: auto;
 }
 
-.info{
-    font-weight: bold;
+.info {
+  font-weight: bold;
 }
 
-
-.btn-success:hover{
-    background-color: rgb(29, 98, 74);
+.btn-success:hover {
+  background-color: rgb(29, 98, 74);
 }
-
 
 @media (max-width: 768px) {
-    #logo{
-        padding-top: 1rem;
-        font-size:1.7rem;
-    }
+  #logo {
+    padding-top: 1rem;
+    font-size: 1.7rem;
+  }
 
-    #messages {
-        height: 400px;
-      }
+  #messages {
+    height: 400px;
+  }
 }
 
-textarea:focus, 
-textarea.form-control:focus, 
-input.form-control:focus, 
-input[type=text]:focus, 
-input[type=password]:focus, 
-input[type=email]:focus, 
-input[type=number]:focus, 
-[type=text].form-control:focus, 
-[type=password].form-control:focus, 
-[type=email].form-control:focus, 
-[type=tel].form-control:focus, 
+textarea:focus,
+textarea.form-control:focus,
+input.form-control:focus,
+input[type="text"]:focus,
+input[type="password"]:focus,
+input[type="email"]:focus,
+input[type="number"]:focus,
+[type="text"].form-control:focus,
+[type="password"].form-control:focus,
+[type="email"].form-control:focus,
+[type="tel"].form-control:focus,
 [contenteditable].form-control:focus {
   box-shadow: none;
 }
 
 textarea {
-    resize: none;
+  resize: none;
 }
