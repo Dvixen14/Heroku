@@ -144,7 +144,7 @@ textarea {
 }
 
 .messaggio:nth-child(odd) {
-  background: rgb(32, 138, 65);
+  background: rgb(39, 55, 66) /*rgb(47, 171, 87)*/;
 }
 
 #clear {

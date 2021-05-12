@@ -136,8 +136,8 @@
                         message.setAttribute('class', 'chat_message');
                         info.setAttribute('class', 'info');
                         date.setAttribute('class', 'data');
-                        
-                        info.textContent =  data[i].name;
+
+                        info.textContent = data[i].name;
                         date.textContent = data[i].date;
                         message.textContent = data[i].message;
 
@@ -179,6 +179,25 @@
                 });
 
                 event.preventDefault();
+            });
+
+            textarea.addEventListener('keydown', function () {
+                if (event.which == 13 && event.shiftKey == false) {
+                    var today = new Date();
+                    var h = today.toLocaleString();
+
+                    today = h;
+                    // Emit to server input
+                    console.log(today);
+                    socket.emit('input', {
+                        date: today,
+                        name: username.value,
+                        message: textarea.value
+                    });
+
+                    event.preventDefault();
+                }
+
             });
 
 
