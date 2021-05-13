@@ -4,6 +4,8 @@ const express = require('express');
 const app = express();
 const http = require('http');
 const server = http.createServer(app);
+var session = require('express-session')
+
 const cors = require('cors');
 const client = require("socket.io")(server, {
     cors: {
@@ -12,9 +14,14 @@ const client = require("socket.io")(server, {
 });
 
 var url = "mongodb+srv://Davide:Y8jM2TdXWRs6aqZ@testcluster1.1p780.mongodb.net/mongochat";
+app.use(session({
+    secret: "ciccio",
+    resave: false,
+  saveUninitialized: true,
+  cookie: { secure: false }
+}));
 
 app.use('/', express.static(__dirname + '/public'));
-
 
 // Connessione a MongoDB
 MongoClient.connect(url, function (err, db) {

@@ -166,6 +166,7 @@
             // Gestione Input
 
             invio.addEventListener('click', function () {
+
                 var today = new Date();
                 var h = today.toLocaleString();
 
@@ -177,12 +178,13 @@
                     name: username.value,
                     message: textarea.value
                 });
-
+                textarea.value = '';
                 event.preventDefault();
             });
 
             textarea.addEventListener('keydown', function () {
                 if (event.which == 13 && event.shiftKey == false) {
+                    
                     var today = new Date();
                     var h = today.toLocaleString();
 
@@ -194,7 +196,7 @@
                         name: username.value,
                         message: textarea.value
                     });
-
+                    textarea.value = '';
                     event.preventDefault();
                 }
 
