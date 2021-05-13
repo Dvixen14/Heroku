@@ -45,7 +45,7 @@ body {
 }
 
 .container .login-text {
-  color: rgb(39, 55, 66);
+  color: var(--primary);
   font-size: 1.1rem;
   text-align: center;
   margin-bottom: 20px;
@@ -72,10 +72,10 @@ body {
 }
 
 .container .login-email .input-group input:focus {
-  border-color: rgb(29, 98, 74);
+  border-color: var(--medium);
 }
 .container .login-email .input-group input:valid {
-  border-color: rgb(47, 171, 87);
+  border-color: var(--light);
 }
 
 .container .login-email .input-group .btn {
@@ -84,7 +84,7 @@ body {
   padding: 15px 20px;
   text-align: center;
   border: none;
-  background: rgb(47, 171, 87);
+  background: var(--light);
   outline: none;
   border-radius: 30px;
   font-size: 1.2rem;
@@ -95,18 +95,18 @@ body {
 
 .container .login-email .input-group .btn:hover {
   transform: translateY(-5px);
-  background: rgb(29, 98, 74);
+  background: var(--medium);
 }
 
 .login-register-text {
   text-align: center;
-  color: rgb(39, 55, 66);
+  color: var(--primary);
   font-weight: 600;
 }
 
 .login-register-text a {
   text-decoration: none;
-  color: rgb(29, 98, 74);
+  color: var(--medium);
 }
 
 /*----------------------------*/
