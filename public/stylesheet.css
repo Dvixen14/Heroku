@@ -142,7 +142,7 @@ textarea {
   padding-bottom: 25px;
   text-shadow: 0px 0px 3px var(--primary);
   box-shadow: INSET 0px 0px 10px #3c454b;
-  animation: slide-up 0.6s ease;
+  animation: slide-up 0.5s ease;
 }
 
 .data {
@@ -211,10 +211,10 @@ textarea {
 @keyframes slide-up {
   0% {
       opacity: 0;
-      transform: translateX(-30px);
+      transform: translateX(-50px);
   }
   100% {
       opacity: 1;
-
-      }
+      transform: translateX(0);
+  }
 }

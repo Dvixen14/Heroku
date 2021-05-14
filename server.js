@@ -42,9 +42,9 @@ MongoClient.connect(url, function (err, db) {
         let chat = db.collection("chats");
         let users = db.collection("users");
         
-        sendStatus = function (s) {
+        /*sendStatus = function (s) {
             socket.emit("status", s);
-        };
+        };*/
 
         // Chat dalla collection su MongoDB
         chat
@@ -70,7 +70,7 @@ MongoClient.connect(url, function (err, db) {
             // Controlla nome e messaggio
             if (name == "" || message == "") {
                 // Send error status
-                sendStatus("Please enter a name and message");
+                // sendStatus("Please enter a name and message");
             } else {
                 // Inserimento messaggio
                         
@@ -78,10 +78,10 @@ MongoClient.connect(url, function (err, db) {
                     client.emit("output", [data]);
 
                     // Send status object
-                    sendStatus({
+                    /*sendStatus({
                         message: "Message sent",
                         clear: true,
-                    });
+                    });*/
                 });
             }
         });
