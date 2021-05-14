@@ -137,10 +137,12 @@ textarea {
   margin-bottom: 16px;
   background-color: var(--secondary);
   padding: 15px;
-  border-radius: 10px;
+  border-radius: 25px;
+  border-top-left-radius: 0px;
   padding-bottom: 25px;
   text-shadow: 0px 0px 3px var(--primary);
-  box-shadow: INSET 0px 0px 10px var(--primary);
+  box-shadow: INSET 0px 0px 10px #3c454b;
+  animation: slide-up 0.6s ease;
 }
 
 .data {
@@ -155,7 +157,7 @@ textarea {
 }
 
 .messaggio:nth-child(odd) {
-  background: var(--primary) /*rgb(47, 171, 87)*/;
+  background: var(--medium) /*rgb(47, 171, 87)*/;
 }
 
 #clear {
@@ -204,4 +206,15 @@ textarea {
     background-color: var(--light);
     border-color: var(--light);
     
+}
+
+@keyframes slide-up {
+  0% {
+      opacity: 0;
+      transform: translateX(-30px);
+  }
+  100% {
+      opacity: 1;
+
+      }
 }
