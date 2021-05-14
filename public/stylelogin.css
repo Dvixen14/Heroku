@@ -3,11 +3,11 @@
 
 :root {
   --primary: #273742;
-  --secondary: #1C5F6C;
+  --secondary: #1c5f6c;
   --medium: #058985;
-  --light: #46B388;
-  --super-light: #97D97C;
-  --yell: #F9F871;
+  --light: #46b388;
+  --super-light: #97d97c;
+  --yell: #f9f871;
 }
 
 * {
@@ -112,6 +112,17 @@ body {
 /*----------------------------*/
 
 @media (max-width: 430px) {
+  #logo {
+    padding-top: 1rem;
+    font-size: 1.2rem;
+  }
+}
+
+@media (max-width: 430px) {
+  #logo {
+    padding-top: 1rem;
+    font-size: 1.6rem;
+  }
   .container {
     width: 300px;
   }
@@ -123,21 +134,12 @@ body {
   }
 }
 
-@media (max-width: 768px) {
-  #logo {
-    padding-top: 1rem;
-    font-size: 1.7rem;
-  }
-}
-
-.btn-outline-success{
+.btn-outline-success {
   color: var(--light);
   border-color: var(--light);
 }
 
-.btn-outline-success:hover{
+.btn-outline-success:hover {
   background-color: var(--light);
   border-color: var(--light);
-  
 }
-
