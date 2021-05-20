@@ -58,6 +58,7 @@ body {
 
 .title{
     font-size: 4rem;
+    text-shadow: 0px 0px 3px var(--secondary);
 }
 
 .footer {
@@ -67,6 +68,10 @@ body {
   clip-path: ellipse(66% 100% at 50% 100%);
   width: 100%;
   color: white;
+}
+
+.db{
+    color: white;
 }
 
 @media (max-width: 500px) {
