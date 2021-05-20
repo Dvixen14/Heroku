@@ -76,6 +76,7 @@ body {
 
   .section {
     padding-top: 15vh;
+    height: 400px;
   }
 
   .container{
