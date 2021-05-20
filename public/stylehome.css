@@ -1,0 +1,126 @@
+@import url("https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap");
+/*------ GENERAL ------*/
+
+:root {
+  --primary: #273742;
+  --secondary: #1c5f6c;
+  --medium: #058985;
+  --light: #46b388;
+  --super-light: #97d97c;
+  --yell: #f9f871;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: "Poppins", sans-serif;
+}
+
+body,
+html {
+  height: 100%;
+  color: var(--primary);
+  min-height: 100%;
+}
+
+body {
+  background: rgb(246, 255, 248);
+  background-repeat: repeat;
+  background-position: center;
+}
+/*------ NAVBAR ------*/
+.navbar {
+  background: var(--primary);
+}
+
+#logo {
+  font-size: 2rem;
+}
+
+/*----------------------------*/
+
+.section {
+  background: var(--light);
+  align-items: center;
+  text-align: center;
+  display: block;
+  box-sizing: border-box;
+  height: 450px;
+  clip-path: ellipse(75% 100% at 50% 0%);
+  padding-top: 18vh;
+}
+
+.container{
+    padding-top: 15vh;
+}
+
+
+.title{
+    font-size: 4rem;
+}
+
+.footer {
+  position: absolute;
+  bottom: 0px;
+  background: var(--primary);
+  clip-path: ellipse(66% 100% at 50% 100%);
+  width: 100%;
+  color: white;
+}
+
+@media (max-width: 500px) {
+  .title {
+    font-size: 5.5vh;
+  }
+
+  .section {
+    padding-top: 15vh;
+  }
+
+  .container{
+    padding-top: 9vh;
+}
+}
+
+@media (max-width: 430px) {
+  #logo {
+    padding-top: 1rem;
+    font-size: 1.6rem;
+  }
+  .container {
+    width: 300px;
+  }
+  .container .login-social {
+    display: block;
+  }
+  .container .login-social a {
+    display: block;
+  }
+}
+
+.btn-outline-success {
+  color: var(--light);
+  border-color: var(--light);
+}
+
+.btn-outline-success:hover {
+  background-color: var(--light);
+  border-color: var(--light);
+}
+
+
+.btn-primary {
+    background: var(--light);
+    color: white;
+    border-color: var(--light);
+    transition: 0.4s;
+  }
+  
+  .btn-primary:hover {
+    background-color: var(--medium);
+    border-color: var(--medium);
+    transform: scale(1.2);
+  transition: 0.4s;
+  }
+  
