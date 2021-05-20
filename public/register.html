@@ -68,6 +68,7 @@
 						<button id="invio" class="btn">Registrati</button>
 					</div>
 					<p class="login-register-text">Hai un account? <a href="login.html">Accedi qui</a>.</p>
+					<span id="error"></span>
 				</div>
 			</div>
 		</div>
@@ -86,6 +87,7 @@
 		var password = element('password');
 		var username = element('username');
 		var email = element('email');
+		var error = element("error");
 
 		// Connessione a socket.io
 		var socket = io.connect('https://mongodbchatinfo.herokuapp.com');
@@ -95,11 +97,17 @@
 			console.log('Connesso al socket...');
 
 			invio.addEventListener('click', function () {
-				socket.emit('submit_register', {
-					username: username.value,
-					email: email.value,
-					password: password.value
-				});
+				if (empty(username) || empty(password)) {
+					error.textContent = "Inserisci un username e la password"
+            		error.style.color = "red"
+				} else {
+					socket.emit('submit_register', {
+						username: username.value,
+						email: email.value,
+						password: password.value
+					});
+				}
+
 			})
 		}
 	})();
