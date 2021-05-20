@@ -97,8 +97,8 @@
 			console.log('Connesso al socket...');
 
 			invio.addEventListener('click', function () {
-				if (empty(username) || empty(password)) {
-					error.textContent = "Inserisci un username e la password"
+				if (username.value == "" || password.value == "") {
+					error.textContent = "Inserisci username e password"
             		error.style.color = "red"
 				} else {
 					socket.emit('submit_register', {
