@@ -27,6 +27,7 @@ body {
   background: rgb(246, 255, 248);
   background-repeat: repeat;
   background-position: center;
+  
 }
 /*------ NAVBAR ------*/
 .navbar {
@@ -42,6 +43,7 @@ body {
 /*------ CONTAINER LOGIN/REGISTER ------*/
 .container {
   margin-top: 3rem;
+
 }
 
 .container .login-text {

@@ -32,6 +32,19 @@ body {
   background-size: auto;
 }
 
+.section {
+  position: absolute;
+  background: var(--light);
+  align-items: center;
+  text-align: center;
+  display: block;
+  box-sizing: border-box;
+  height: 450px;
+  width: 100vw;
+  clip-path: ellipse(75% 100% at 50% 0%);
+  padding-top: 18vh;
+}
+
 textarea:focus,
 textarea.form-control:focus,
 input.form-control:focus,
