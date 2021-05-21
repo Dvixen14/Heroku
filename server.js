@@ -49,7 +49,6 @@ MongoClient.connect(url, function (err, db) {
         // Chat dalla collection su MongoDB
         chat
             .find()
-            .limit(100)
             .sort({ _id: 1 })
             .toArray(function (err, res) {
                 //check for errors

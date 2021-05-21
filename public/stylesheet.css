@@ -43,6 +43,8 @@ body {
   width: 100vw;
   clip-path: ellipse(75% 100% at 50% 0%);
   padding-top: 18vh;
+  animation: slide-down 0.7s ease;
+  z-index: 0;
 }
 
 textarea:focus,
@@ -67,6 +69,7 @@ textarea {
 /*------ NAVBAR ------*/
 .navbar {
   background: var(--primary);
+  z-index: 100;
 }
 
 #logo {
@@ -225,5 +228,16 @@ textarea {
   100% {
     opacity: 1;
     transform: translateX(0);
+  }
+}
+
+@keyframes slide-down {
+  0% {
+    opacity: 0;
+    transform: translateY(-50px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0);
   }
 }

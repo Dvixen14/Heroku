@@ -32,6 +32,7 @@ body {
 /*------ NAVBAR ------*/
 .navbar {
   background: var(--primary);
+  z-index: 100;
 }
 
 #logo {
