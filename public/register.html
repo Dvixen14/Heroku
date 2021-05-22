@@ -91,7 +91,7 @@
 		var error = element("error");
 
 		// Connessione a socket.io
-		var socket = io.connect('https://mongodbchatinfo.herokuapp.com');
+		var socket = io.connect('localhost:8000');
 
 		if (socket !== undefined) {
 			console.log(socket);
@@ -111,33 +111,28 @@
 						email: email.value,
 					});
 
-					socket.on('checked', function (data) {
-						console.log(data)
-						if (data.length) {
-							for (var i = 0; i < data.length; i++) {
-								if (data[i].username == username.value || data[i].email == email.value) {
-									error.textContent = "Utente già registrato"
-									error.style.color = "red"
-								}
-								else {
-									console.log("registrato")
-									socket.emit('submit_register', {
-										username: username.value,
-										email: email.value,
-										password: password.value
-									});
-									//location.href = "login.html";
-								}
-							}
-
-
-
-						}
-					});
-
 				}
 
 			})
+
+			socket.on('fail', function (){
+				
+				error.textContent = "Utente già registrato"
+				error.style.color = "red"
+				setTimeout(function(){ error.textContent = ""; }, 2000);
+			});
+
+			socket.on('success', function (data){
+				console.log("registrato")
+				socket.emit('submit_register', {
+					username: username.value,
+					email: email.value,
+					password: password.value
+				});
+				location.href = "login.html";
+
+			})
+
 		}
 	})();
 </script>

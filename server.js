@@ -90,7 +90,7 @@ MongoClient.connect(url, function (err, db) {
             let mail = data.email;
             let pwd = data.password;
 
-            users.insert({ username: user, email: mail, password: pwd }, function () {
+            users.insertOne({ username: user, email: mail, password: pwd }, function () {
                 console.log("utente registrato...");
             });
         });
@@ -100,16 +100,17 @@ MongoClient.connect(url, function (err, db) {
             let email = data.email;
 
             users
-                .find()
-                .sort({ _id: 1 })
-                .toArray(function (err, res) {
+                .findOne({$or:[{username: username}, {email: email}]})
+                .then(function (err, res) {
                     //check for errors
                     if (err) {
                         throw err;
                     }
-                    //else emit
-                    socket.emit("checked", res);
-                });
+                    if (!res){
+                        socket.emit("success", res);
+                    } 
+                })
+                .catch((err)=>socket.emit("fail"))
         });
 
         /*socket.on('submit_login', function(data){
