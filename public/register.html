@@ -98,21 +98,24 @@
 			var checked;
 			invio.addEventListener('click', function () {
 				checked = false;
-				socket.emit('check_users', {
-					username: username.value,
-					email: email.value,
-				});
-				socket.on('checked', function () {
-					checked = true;
-					console.log(username);
-				});
-				
 
 				if (username.value == "" || password.value == "") {
 					error.textContent = "Inserisci username e password"
 					error.style.color = "red"
 
-				} else if(checked==true) {
+				} else {
+					socket.emit('check_users', {
+						username: username.value,
+						email: email.value,
+					});
+
+				}
+				socket.on('checked', function (data) {
+					checked = data;
+					console.log(checked);
+				});
+
+				if (checked == true) {
 					error.textContent = "Utente già registrato"
 					error.style.color = "red"
 				} else {
