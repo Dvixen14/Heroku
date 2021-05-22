@@ -109,7 +109,7 @@ MongoClient.connect(url, function (err, db) {
             let email = data.email;
 
             users
-                .find()
+                .find({ username: username, email: email})
                 .sort({ _id: 1 })
                 .toArray(function (err, res) {
                     //check for errors
