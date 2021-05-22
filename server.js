@@ -1,4 +1,4 @@
-var port = process.env.PORT||8000;
+var port = process.env.PORT || 8000;
 const MongoClient = require("mongodb").MongoClient;
 const express = require('express');
 const app = express();
@@ -9,7 +9,7 @@ var session = require('express-session')
 const cors = require('cors');
 const client = require("socket.io")(server, {
     cors: {
-      origin: '*',
+        origin: '*',
     }
 });
 
@@ -17,8 +17,8 @@ var url = "mongodb+srv://Davide:Y8jM2TdXWRs6aqZ@testcluster1.1p780.mongodb.net/m
 app.use(session({
     secret: "ciccio",
     resave: false,
-  saveUninitialized: true,
-  cookie: { secure: false }
+    saveUninitialized: true,
+    cookie: { secure: false }
 }));
 
 app.use('/', express.static(__dirname + '/public'));
@@ -26,7 +26,7 @@ app.use('/', express.static(__dirname + '/public'));
 // Connessione a MongoDB
 MongoClient.connect(url, function (err, db) {
     if (err) throw err;
-   var db = db.db('mongochat');
+    var db = db.db('mongochat');
 
     /*var dbo = db.db("mongochat");
     dbo.createCollection("users", function (err, res) {
@@ -68,8 +68,8 @@ MongoClient.connect(url, function (err, db) {
                 // sendStatus("Please enter a name and message");
             } else {
                 // Inserimento messaggio
-                        
-                chat.insert({name: name, message: message, date: date}, function () {
+
+                chat.insert({ name: name, message: message, date: date }, function () {
                     client.emit("output", [data]);
 
                 });
@@ -85,13 +85,30 @@ MongoClient.connect(url, function (err, db) {
             });
         });
 
-        socket.on('submit_register', function(data){
+        socket.on('submit_register', function (data) {
             let user = data.username;
             let mail = data.email;
             let pwd = data.password;
 
-                users.insert({username: user, email: mail, password: pwd}, function(){
-                    console.log("utente registrato...");
+            users.insert({ username: user, email: mail, password: pwd }, function () {
+                console.log("utente registrato...");
+            });
+        });
+
+        socket.on('check_users', function (data) {
+            let username = data.username;
+            let email = data.email;
+
+            users
+                .find()
+                .sort({ _id: 1 })
+                .toArray(function (err, res) {
+                    //check for errors
+                    if (err) {
+                        throw err;
+                    }
+                    //else emit
+                    socket.emit("checked", res);
                 });
         });
 

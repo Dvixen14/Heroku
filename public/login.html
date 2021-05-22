@@ -53,7 +53,7 @@
 					<div class="login-email">
 						<p class="login-text" style="font-size: 2rem; font-weight: 600;">Login </p>
 						<div class="input-group">
-							<input id="email" type="email" placeholder="Email" name="email" required>
+							<input id="username" type="username" placeholder="Username" name="username" required>
 						</div>
 						<div class="input-group">
 							<input id="password" type="password" placeholder="Password" name="password" required>
@@ -80,7 +80,7 @@
 
 		var invio = element('invio');
 		var password = element('password');
-		var email = element('email');
+		var username = element('username');
 
 		// Connessione a socket.io
 		var socket = io.connect('https://mongodbchatinfo.herokuapp.com');
@@ -91,7 +91,7 @@
 
 			invio.addEventListener('click', function () {
 				socket.emit('submit_login', {
-					name: email.value,
+					name: username.value,
 					password: password.value
 				});
 			})
