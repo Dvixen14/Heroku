@@ -95,18 +95,33 @@
 		if (socket !== undefined) {
 			console.log(socket);
 			console.log('Connesso al socket...');
-
+			var checked;
 			invio.addEventListener('click', function () {
+				checked = false;
+				socket.emit('check_users', {
+					username: username.value,
+					email: email.value,
+				});
+				socket.on('checked', function () {
+					checked = true;
+					console.log(username);
+				});
+				
+
 				if (username.value == "" || password.value == "") {
 					error.textContent = "Inserisci username e password"
-            		error.style.color = "red"
+					error.style.color = "red"
+
+				} else if(checked==true) {
+					error.textContent = "Utente già registrato"
+					error.style.color = "red"
 				} else {
 					socket.emit('submit_register', {
 						username: username.value,
 						email: email.value,
 						password: password.value
 					});
-					location.href = "login.html";
+					//location.href = "login.html";
 				}
 
 			})

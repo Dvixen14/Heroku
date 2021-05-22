@@ -104,6 +104,15 @@ MongoClient.connect(url, function (err, db) {
                 });
         });
 
+        socket.on('check_users', function(data){
+            let username = data.username;
+            let email = data.email;
+
+                users.find({username: username, email: email}, function(){
+                    socket.emit("checked", username);
+                });
+        });
+
         /*socket.on('submit_login', function(data){
             let user = data.name;
             let pwd = data.password;
