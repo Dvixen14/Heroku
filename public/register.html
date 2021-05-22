@@ -85,6 +85,7 @@
 
 		var invio = element('invio');
 		var password = element('password');
+		var cpassword = element('cpassword');
 		var username = element('username');
 		var email = element('email');
 		var error = element("error");
@@ -95,37 +96,38 @@
 		if (socket !== undefined) {
 			console.log(socket);
 			console.log('Connesso al socket...');
-			var checked;
+			var checked = false;
 			invio.addEventListener('click', function () {
-				checked = false;
 
-				if (username.value == "" || password.value == "") {
-					error.textContent = "Inserisci username e password"
-					error.style.color = "red"
-
-				} else {
-					socket.emit('check_users', {
-						username: username.value,
-						email: email.value,
-					});
-
-				}
-				socket.on('checked', function (data) {
-					checked = data;
-					console.log(checked);
+				socket.emit('check_users', {
+					username: username.value,
 				});
 
-				if (checked == true) {
-					error.textContent = "Utente già registrato"
-					error.style.color = "red"
-				} else {
-					socket.emit('submit_register', {
-						username: username.value,
-						email: email.value,
-						password: password.value
-					});
-					//location.href = "login.html";
-				}
+				socket.on('checked', function (data) {
+					console.log(data)
+
+					if (username.value == "" || password.value == "") {
+						error.textContent = "Inserisci username e password"
+						error.style.color = "red"
+					} else if (password.value != cpassword.value) {
+						error.textContent = "La password di conferma non coincide"
+						error.style.color = "red"
+					} else if (checked == true) {
+						error.textContent = "Utente già registrato"
+						error.style.color = "red"
+					} else {
+						socket.emit('submit_register', {
+							username: username.value,
+							email: email.value,
+							password: password.value
+						});
+						//location.href = "login.html";
+					}
+
+
+				});
+
+
 
 			})
 		}
