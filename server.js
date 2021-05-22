@@ -41,10 +41,6 @@ MongoClient.connect(url, function (err, db) {
     client.on("connection", function (socket) {
         let chat = db.collection("chats");
         let users = db.collection("users");
-        
-        /*sendStatus = function (s) {
-            socket.emit("status", s);
-        };*/
 
         // Chat dalla collection su MongoDB
         chat
@@ -76,11 +72,6 @@ MongoClient.connect(url, function (err, db) {
                 chat.insert({name: name, message: message, date: date}, function () {
                     client.emit("output", [data]);
 
-                    // Send status object
-                    /*sendStatus({
-                        message: "Message sent",
-                        clear: true,
-                    });*/
                 });
             }
         });
