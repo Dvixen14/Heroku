@@ -105,17 +105,25 @@
 
 				socket.on('checked', function (data) {
 					console.log(data)
+					if (data.length) {
+						for (var i = 0; i < data.length; i++) {
+							if (username.value == "" || password.value == "") {
+								error.textContent = "Inserisci username e password"
+								error.style.color = "red"
+							} else if (password.value != cpassword.value) {
+								error.textContent = "La password di conferma non coincide"
+								error.style.color = "red"
+							} else if (data[i].username == username.value) {
+								error.textContent = "Utente già registrato"
+								error.style.color = "red"
+							} else if (data[i].email == email.value) {
+								error.textContent = "Utente già registrato"
+								error.style.color = "red"
+							}
 
-					if (username.value == "" || password.value == "") {
-						error.textContent = "Inserisci username e password"
-						error.style.color = "red"
-					} else if (password.value != cpassword.value) {
-						error.textContent = "La password di conferma non coincide"
-						error.style.color = "red"
-					} else if (checked == true) {
-						error.textContent = "Utente già registrato"
-						error.style.color = "red"
+						}
 					} else {
+						console.log("registrato")
 						socket.emit('submit_register', {
 							username: username.value,
 							email: email.value,
@@ -123,8 +131,6 @@
 						});
 						//location.href = "login.html";
 					}
-
-
 				});
 
 

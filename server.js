@@ -106,9 +106,10 @@ MongoClient.connect(url, function (err, db) {
 
         socket.on('check_users', function (data) {
             let username = data.username;
+            let email = data.email;
 
             users
-                .find({ username: username})
+                .find({ username: username, email: email})
                 .sort({ _id: 1 })
                 .toArray(function (err, res) {
                     //check for errors
