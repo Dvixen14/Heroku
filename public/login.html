@@ -33,14 +33,14 @@
 			<div class="collapse navbar-collapse navbar-toggleable-xs" id="navbarNav">
 				<ul class="navbar-nav mr-auto">
 					<li class="nav-item">
-						<a class="nav-link" href="index.html">Home</a>
+						<a class="nav-link" href="index">Home</a>
 					</li>
 					<li class="nav-item">
-						<a class="nav-link" href="chat.html">Chat</a>
+						<a class="nav-link" href="chat">Chat</a>
 					</li>
 				</ul>
 
-				<form class="form-inline navbar-form float-right" method="get" action="login.html">
+				<form class="form-inline navbar-form float-right" method="get" action="login">
 					<button class="btn btn-outline-success ml-auto" type="submit">Login</button>
 				</form>
 			</div>
@@ -53,16 +53,17 @@
 					<div class="login-email">
 						<p class="login-text" style="font-size: 2rem; font-weight: 600;">Login </p>
 						<div class="input-group">
-							<input id="username" type="username" placeholder="Username" name="username" required>
+							<input id="username" type="username" placeholder="Email o username" name="username" required>
 						</div>
 						<div class="input-group">
 							<input id="password" type="password" placeholder="Password" name="password" required>
 						</div>
-						<form class="input-group" action="login.html">
+						<div class="input-group">
 							<button id="invio" class="btn">Login</button>
-						</form>
-						<p class="login-register-text">Non hai un account? <a href="register.html">Registrati qui</a>.
+						</div>
+						<p class="login-register-text">Non hai un account? <a href="register">Registrati qui</a>.
 						</p>
+						<span id="error"></span>
 					</div>
 				</div>
 			</div>
@@ -83,7 +84,7 @@
 		var username = element('username');
 
 		// Connessione a socket.io
-		var socket = io.connect('https://mongodbchatinfo.herokuapp.com');
+		var socket = io.connect('localhost:8000');
 
 		if (socket !== undefined) {
 			console.log(socket);
@@ -95,6 +96,19 @@
 					password: password.value
 				});
 			})
+
+			socket.on('success', function (data){
+
+				console.log("loggato");
+				location.href = "chat";
+
+			});
+
+			socket.on('fail', function (data){
+				error.textContent = "Credenziali errate"
+				error.style.color = "red"
+				setTimeout(function(){ error.textContent = ""; }, 2000);
+			});
 		}
 	})();
 </script>

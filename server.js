@@ -1,129 +1,189 @@
 var port = process.env.PORT || 8000;
 const MongoClient = require("mongodb").MongoClient;
-const express = require('express');
+const MongoStore = require('connect-mongo');
+const express = require("express");
 const app = express();
-const http = require('http');
+const http = require("http");
 const server = http.createServer(app);
-var session = require('express-session')
+var session = require("express-session");
+const { v4: uuidv4 } = require('uuid');
+uuidv4(); // ⇨ '1b9d6bcd-bbfd-4b2d-9b5d-ab8dfbbd4bed'
 
-const cors = require('cors');
+const cors = require("cors");
 const client = require("socket.io")(server, {
-    cors: {
-        origin: '*',
-    }
+  cors: {
+    origin: "*",
+  },
 });
 
-var url = "mongodb+srv://Davide:Y8jM2TdXWRs6aqZ@testcluster1.1p780.mongodb.net/mongochat";
-app.use(session({
-    secret: "ciccio",
+var url =
+  "mongodb+srv://Davide:Y8jM2TdXWRs6aqZ@testcluster1.1p780.mongodb.net/mongochat";
+
+  
+app.use(
+  session({
+    secret: "secretkey",
     resave: false,
     saveUninitialized: true,
-    cookie: { secure: false }
-}));
+    cookie: { secure: false },
+    genid: () => uuidv4(),
+    /*store:  MongoStore.create({
+        client: MongoClient,
+        dbName: 'mongochat'
+      })*/
+  })
+);
 
-app.use('/', express.static(__dirname + '/public'));
+app.use("/", express.static(__dirname + "/public"));
+
+app.get('/login', (req, res) =>{
+    res.sendFile('/public/login.html', { root: __dirname });
+    console.log(req.session.id);
+    req.session.isLogged = true;
+})
+
+app.get('/logout', (req, res) =>{
+    res.sendFile('/public/login.html', { root: __dirname });
+    req.session.isLogged = false;
+})
+
+app.get('/chat', (req, res) =>{
+    if(req.session.isLogged){
+        res.sendFile('/public/chat.html', { root: __dirname });
+    } else {
+        res.sendFile('/public/error.html', { root: __dirname });
+    }
+})
+
+app.get('/index', (req, res) =>{
+    res.sendFile('/public/index.html', { root: __dirname });
+    req.session.isLogged = false;
+})
+
+app.get('/register', (req, res) =>{
+    res.sendFile('/public/register.html', { root: __dirname });
+})
+
 
 // Connessione a MongoDB
 MongoClient.connect(url, function (err, db) {
-    if (err) throw err;
-    var db = db.db('mongochat');
+  if (err) throw err;
+  var db = db.db("mongochat");
 
-    /*var dbo = db.db("mongochat");
+  /*var dbo = db.db("mongochat");
     dbo.createCollection("users", function (err, res) {
         if (err) throw err;
         console.log("Collection created!");
         db.close();
     });*/
 
-    console.log("Connesso a MongoDB...");
+  console.log("Connesso a MongoDB...");
 
-    // Connessione a Socket.io
-    client.on("connection", function (socket) {
-        let chat = db.collection("chats");
-        let users = db.collection("users");
+  // Connessione a Socket.io
+  client.on("connection", function (socket) {
+    let chat = db.collection("chats");
+    let users = db.collection("users");
 
-        // Chat dalla collection su MongoDB
-        chat
-            .find()
-            .sort({ _id: 1 })
-            .toArray(function (err, res) {
-                //check for errors
-                if (err) {
-                    throw err;
-                }
-                //else emit
-                socket.emit("output", res);
-            });
+    // Chat dalla collection su MongoDB
+    chat
+      .find()
+      .sort({ _id: 1 })
+      .toArray(function (err, res) {
+        //check for errors
+        if (err) {
+          throw err;
+        }
+        //else emit
+        socket.emit("output", res);
+      });
 
-        // Gestione degli eventi input
-        socket.on("input", function (data) {
+    // Gestione degli eventi input
+    socket.on("input", function (data) {
+      let date = data.date;
+      let name = data.name;
+      let message = data.message;
 
-            let date = data.date;
-            let name = data.name;
-            let message = data.message;
+      // Controlla nome e messaggio
+      if (name == "" || message == "") {
+        // Send error status
+        // sendStatus("Please enter a name and message");
+      } else {
+        // Inserimento messaggio
 
-            // Controlla nome e messaggio
-            if (name == "" || message == "") {
-                // Send error status
-                // sendStatus("Please enter a name and message");
-            } else {
-                // Inserimento messaggio
-
-                chat.insert({ name: name, message: message, date: date }, function () {
-                    client.emit("output", [data]);
-
-                });
-            }
+        chat.insert({ name: name, message: message, date: date }, function () {
+          client.emit("output", [data]);
         });
-
-        // Handle clear
-        socket.on("clear", function (data) {
-            // Rimuove tutte la chat dalla collection
-            chat.remove({}, function () {
-                // Emit cleared
-                socket.emit("cleared");
-            });
-        });
-
-        socket.on('submit_register', function (data) {
-            let user = data.username;
-            let mail = data.email;
-            let pwd = data.password;
-
-            users.insertOne({ username: user, email: mail, password: pwd }, function () {
-                console.log("utente registrato...");
-            });
-        });
-
-        socket.on('check_users', function (data) {
-            let username = data.username;
-            let email = data.email;
-
-            users
-                .findOne({$or:[{username: username}, {email: email}]})
-                .then(function (err, res) {
-                    //check for errors
-                    if (err) {
-                        throw err;
-                    }
-                    if (!res){
-                        socket.emit("success", res);
-                    } 
-                })
-                .catch((err)=>socket.emit("fail"))
-        });
-
-        /*socket.on('submit_login', function(data){
-            let user = data.name;
-            let pwd = data.password;
-
-                
-        });*/
-
-
+      }
     });
+
+    // Handle clear
+    socket.on("clear", function (data) {
+      // Rimuove tutte la chat dalla collection
+      chat.remove({}, function () {
+        // Emit cleared
+        socket.emit("cleared");
+      });
+    });
+
+    socket.on("submit_register", function (data) {
+      let user = data.username;
+      let mail = data.email;
+      let pwd = data.password;
+
+      users.insertOne(
+        { username: user, email: mail, password: pwd },
+        function () {
+          console.log("utente registrato...");
+        }
+      );
+    });
+
+    socket.on("check_users", function (data) {
+      let username = data.username;
+      let email = data.email;
+
+      users
+        .findOne({ $or: [{ username: username }, { email: email }] })
+        .then(function (err, res) {
+          //check for errors
+          if (err) {
+            throw err;
+          }
+          if (!res) {
+            socket.emit("success", res);
+          }
+        })
+        .catch((err) => socket.emit("fail"));
+    });
+
+    socket.on("submit_login", function (data) {
+      let username = data.name;
+      let password = data.password;
+
+      console.log(username);
+      console.log(password);
+
+      users
+        .find({
+          $or: [
+            { $and: [{ username: username }, { password: password }] },
+            { $and: [{ email: username }, { password: password }] },
+          ],
+        })
+        .toArray(function (err, res) {
+          if (err) {
+            throw err;
+          }
+          if (res.length > 0) {
+            socket.emit("success", res);
+          } else {
+            socket.emit("fail");
+          }
+        });
+    });
+  });
 });
 
 server.listen(port, () => {
-    console.log('listening on *:8000');
+  console.log("listening on *:8000");
 });

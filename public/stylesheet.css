@@ -241,3 +241,7 @@ textarea {
     transform: translateY(0);
   }
 }
+
+.error_text{
+  padding-top: 12vh;
+}

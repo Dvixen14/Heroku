@@ -22,7 +22,7 @@
 <body>
 	<header>
 		<nav class="navbar navbar-expand-lg navbar-dark">
-			<a id="logo" class="navbar-brand mt-auto mb-auto" href="index.html">
+			<a id="logo" class="navbar-brand mt-auto mb-auto" href="index">
 				<img src="logo.png" width="50" height="50" class="d-inline-block align-top" alt="">
 				MongoDBChat
 			</a>
@@ -34,14 +34,14 @@
 			<div class="collapse navbar-collapse navbar-toggleable-xs" id="navbarNav">
 				<ul class="navbar-nav mr-auto">
 					<li class="nav-item">
-						<a class="nav-link" href="index.html">Home</a>
+						<a class="nav-link" href="index">Home</a>
 					</li>
 					<li class="nav-item">
-						<a class="nav-link" href="chat.html">Chat</a>
+						<a class="nav-link" href="chat">Chat</a>
 					</li>
 				</ul>
 
-				<form class="form-inline navbar-form float-right" method="get" action="login.html">
+				<form class="form-inline navbar-form float-right" method="get" action="login">
 					<button class="btn btn-outline-success ml-auto" type="submit">Login</button>
 				</form>
 			</div>
@@ -64,10 +64,10 @@
 					<div class="input-group">
 						<input id="cpassword" type="password" placeholder="Conferma Password" name="cpassword" required>
 					</div>
-					<div class="input-group" action="">
+					<div class="input-group">
 						<button id="invio" class="btn">Registrati</button>
 					</div>
-					<p class="login-register-text">Hai un account? <a href="login.html">Accedi qui</a>.</p>
+					<p class="login-register-text">Hai un account? <a href="login">Accedi qui</a>.</p>
 					<span id="error"></span>
 				</div>
 			</div>
@@ -117,7 +117,7 @@
 
 			socket.on('fail', function (){
 				
-				error.textContent = "Utente già registrato"
+				error.textContent = "Un utente è già registrato con questo username ed email"
 				error.style.color = "red"
 				setTimeout(function(){ error.textContent = ""; }, 2000);
 			});
@@ -129,9 +129,9 @@
 					email: email.value,
 					password: password.value
 				});
-				location.href = "login.html";
+				location.href = "login";
 
-			})
+			});
 
 		}
 	})();
