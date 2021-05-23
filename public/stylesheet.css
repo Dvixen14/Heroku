@@ -196,6 +196,9 @@ textarea {
   #messages {
     height: 400px;
   }
+  .error_text {
+    font-size: 5vh;
+  }
 }
 
 @media (max-width: 1680px) {
