@@ -92,7 +92,7 @@
 		var error = element("error");
 
 		// Connessione a socket.io
-		var socket = io.connect('localhost:8000');
+		var socket = io.connect('https://mongodbchatinfo.herokuapp.com');
 
 		if (socket !== undefined) {
 			console.log(socket);
