@@ -41,8 +41,9 @@
 					</li>
 				</ul>
 
-				<form class="form-inline navbar-form float-right" method="get" action="login">
-					<button class="btn btn-outline-success ml-auto" type="submit">Login</button>
+				<form id="form" class="form-inline navbar-form float-right" method="get" action="login">
+					<button id="login" class="btn btn-outline-success ml-auto" type="submit">Login</button>
+					<button id="logout" class="btn btn-outline-danger ml-auto" type="submit" onclick="sessionStorage.setItem('logged', false);">Logout</button>
 				</form>
 			</div>
 		</nav>
@@ -115,14 +116,14 @@
 
 			})
 
-			socket.on('fail', function (){
-				
+			socket.on('fail', function () {
+
 				error.textContent = "Un utente è già registrato con questo username ed email"
 				error.style.color = "red"
-				setTimeout(function(){ error.textContent = ""; }, 2000);
+				setTimeout(function () { error.textContent = ""; }, 2000);
 			});
 
-			socket.on('success', function (data){
+			socket.on('success', function (data) {
 				console.log("registrato")
 				socket.emit('submit_register', {
 					username: username.value,
@@ -134,7 +135,21 @@
 			});
 
 		}
+
+		var logged = sessionStorage.getItem("logged");
+		console.log(logged);
+		if (logged == "true") {
+			document.getElementById("form").action = "logout"
+			document.getElementById("login").style.display = "none";
+			document.getElementById("logout").style.display = "block";
+		} else {
+			document.getElementById("form").action = "login"
+			document.getElementById("login").style.display = "block";
+			document.getElementById("logout").style.display = "none";
+		}
 	})();
+
+
 </script>
 
 </html>

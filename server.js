@@ -5,9 +5,23 @@ const express = require("express");
 const app = express();
 const http = require("http");
 const server = http.createServer(app);
-var session = require("express-session");
+var session = require("express-session")({
+  secret: "secretkey",
+  resave: false,
+  saveUninitialized: true,
+  cookie: { secure: false },
+  genid: () => uuidv4(),
+  /*store:  MongoStore.create({
+      client: MongoClient,
+      dbName: 'mongochat'
+    })*/
+});
 const { v4: uuidv4 } = require('uuid');
-uuidv4(); // ⇨ '1b9d6bcd-bbfd-4b2d-9b5d-ab8dfbbd4bed'
+// uuidv4(); // ⇨ '1b9d6bcd-bbfd-4b2d-9b5d-ab8dfbbd4bed'
+
+var sharedsession = require("express-socket.io-session");
+
+
 
 const cors = require("cors");
 const client = require("socket.io")(server, {
@@ -19,49 +33,40 @@ const client = require("socket.io")(server, {
 var url =
   "mongodb+srv://Davide:Y8jM2TdXWRs6aqZ@testcluster1.1p780.mongodb.net/mongochat";
 
-  
-app.use(
-  session({
-    secret: "secretkey",
-    resave: false,
-    saveUninitialized: true,
-    cookie: { secure: false },
-    genid: () => uuidv4(),
-    /*store:  MongoStore.create({
-        client: MongoClient,
-        dbName: 'mongochat'
-      })*/
-  })
-);
+client.use(sharedsession(session, {
+  autoSave: true
+}));
+
+app.use(session)
+
 
 app.use("/", express.static(__dirname + "/public"));
 
-app.get('/login', (req, res) =>{
-    res.sendFile('/public/login.html', { root: __dirname });
-    console.log(req.session.id);
-    req.session.isLogged = true;
+app.get('/login', (req, res) => {
+  res.sendFile('/public/login.html', { root: __dirname });
+  console.log(req.session.id);
+
 })
 
-app.get('/logout', (req, res) =>{
-    res.sendFile('/public/login.html', { root: __dirname });
-    req.session.isLogged = false;
+app.get('/logout', (req, res) => {
+  res.sendFile('/public/login.html', { root: __dirname });
+  req.session.destroy();
 })
 
-app.get('/chat', (req, res) =>{
-    if(req.session.isLogged){
-        res.sendFile('/public/chat.html', { root: __dirname });
-    } else {
-        res.sendFile('/public/error.html', { root: __dirname });
-    }
+app.get('/chat', (req, res) => {
+  if (req.session.isLogged) {
+    res.sendFile('/public/chat.html', { root: __dirname });
+  } else {
+    res.sendFile('/public/error.html', { root: __dirname });
+  }
 })
 
-app.get('/index', (req, res) =>{
-    res.sendFile('/public/index.html', { root: __dirname });
-    req.session.isLogged = false;
+app.get('/index', (req, res) => {
+  res.sendFile('/public/index.html', { root: __dirname });
 })
 
-app.get('/register', (req, res) =>{
-    res.sendFile('/public/register.html', { root: __dirname });
+app.get('/register', (req, res) => {
+  res.sendFile('/public/register.html', { root: __dirname });
 })
 
 
@@ -160,8 +165,8 @@ MongoClient.connect(url, function (err, db) {
       let username = data.name;
       let password = data.password;
 
-      console.log(username);
-      console.log(password);
+      //console.log(username);
+      //console.log(password);
 
       users
         .find({
@@ -175,6 +180,8 @@ MongoClient.connect(url, function (err, db) {
             throw err;
           }
           if (res.length > 0) {
+            socket.handshake.session.isLogged = true
+            socket.handshake.session.save()
             socket.emit("success", res);
           } else {
             socket.emit("fail");
