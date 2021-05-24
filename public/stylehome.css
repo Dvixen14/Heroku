@@ -79,7 +79,7 @@ body {
 
 @media (max-width: 500px) {
   .title {
-    font-size: 5.5vh;
+    font-size: 5vh;
   }
 
   .section {
@@ -88,14 +88,21 @@ body {
   }
 
   .container{
-    padding-top: 9vh;
+    padding-top: 8vh;
 }
 }
 
 @media (max-width: 430px) {
+  .title {
+    font-size: 4.5vh;
+  }
+  .section {
+    padding-top: 12vh;
+    height: 300px;
+  }
   #logo {
     padding-top: 1rem;
-    font-size: 1.6rem;
+    font-size: 1.2rem;
   }
   .container {
     width: 300px;

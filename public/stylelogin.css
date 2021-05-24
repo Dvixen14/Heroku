@@ -124,7 +124,7 @@ body {
 @media (max-width: 430px) {
   #logo {
     padding-top: 1rem;
-    font-size: 1.6rem;
+    font-size: 1.2rem;
   }
   .container {
     width: 300px;
