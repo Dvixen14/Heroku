@@ -102,7 +102,7 @@ MongoClient.connect(url, function (err, db) {
         }
         //else emit
         socket.emit("output", res);
-      });
+    });
 
     // Gestione degli eventi input
     socket.on("input", function (data) {
