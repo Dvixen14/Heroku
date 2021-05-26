@@ -109,9 +109,9 @@ MongoClient.connect(url, function (err, db) {
       let message = data.message;
 
       // Controlla nome e messaggio
-      if (name == "" || message == "") {
+      if (message == "") {
         // Send error status
-        // sendStatus("Please enter a name and message");
+
       } else {
         // Inserimento messaggio
 
@@ -182,7 +182,7 @@ MongoClient.connect(url, function (err, db) {
           if (res.length > 0) {
             socket.handshake.session.isLogged = true
             socket.handshake.session.save()
-            socket.emit("success", res);
+            socket.emit("success", user);
           } else {
             socket.emit("fail");
           }

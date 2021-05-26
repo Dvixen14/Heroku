@@ -90,7 +90,7 @@
         }
 
 
-        // Get elemnts
+        // Get elementi
         var status = element('status');
         var messages = element('messages');
         var textarea = element('textarea');
@@ -218,7 +218,7 @@
             });
         }
         var logged = sessionStorage.getItem("logged");
-        console.log(logged);
+
         if (logged == "true") {
             document.getElementById("form").action = "logout"
             document.getElementById("login").style.display = "none";

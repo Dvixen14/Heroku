@@ -251,5 +251,20 @@ font-size: 1.5rem;
 }
 
 .error_text{
+  font-size: 5vh;
   padding-top: 12vh;
+}
+
+
+.log_text {
+  font-size: 2.8vh;
+  padding-top: 4vh;
+  text-align: center;
+  color: var(--primary);
+  font-weight: 600;
+}
+
+.log_text a {
+  text-decoration: none;
+  color: #fff;
 }

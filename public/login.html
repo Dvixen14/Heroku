@@ -86,8 +86,9 @@
 		var username = element('username');
 
 		// Connessione a socket.io
-		var socket = io.connect('https://mongodbchatinfo.herokuapp.com');
-
+		var socket = io.connect('localhost:8000');
+		// localhost:8000
+		// https://mongodbchatinfo.herokuapp.com
 		if (socket !== undefined) {
 			console.log(socket);
 			console.log('Connesso al socket...');
@@ -104,7 +105,7 @@
 				console.log("loggato");
 				sessionStorage.setItem("logged", true);
 				sessionStorage.setItem("user", username.value);
-				location.href = "chat";
+				//location.href = "chat";
 
 			});
 
