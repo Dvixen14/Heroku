@@ -92,6 +92,33 @@ body {
 }
 }
 
+@media (max-width: 500px) {
+  .title {
+    font-size: 5vh;
+  }
+
+  .section {
+    padding-top: 15vh;
+    height: 400px;
+  }
+
+  .container{
+    padding-top: 8vh;
+}
+}
+
+@media (max-height: 900px) {
+
+  .section {
+    padding-top: 15vh;
+    height: 400px;
+  }
+
+  .container{
+    padding-top: 6vh;
+}
+}
+
 @media (max-width: 430px) {
   .title {
     font-size: 4.5vh;
