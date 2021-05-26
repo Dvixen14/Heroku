@@ -156,17 +156,6 @@
                 }
             });
 
-            // Get status dal server
-            socket.on('status', function (data) {
-                // Get message status
-                setStatus((typeof data === 'object') ? data.message : data);
-
-                // If status is clear, clear text
-                if (data.clear) {
-                    textarea.value = '';
-                }
-
-            });
             // Gestione Input
 
             invio.addEventListener('click', function () {
