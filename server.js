@@ -55,8 +55,10 @@ app.get('/logout', (req, res) => {
 
 app.get('/chat', (req, res) => {
   if (req.session.isLogged) {
+    console.log(req.session.isLogged);
     res.sendFile('/public/chat.html', { root: __dirname });
   } else {
+    console.log(req.session.isLogged);
     res.sendFile('/public/error.html', { root: __dirname });
   }
 })
@@ -100,7 +102,7 @@ MongoClient.connect(url, function (err, db) {
         }
         //else emit
         socket.emit("output", res);
-    });
+      });
 
     // Gestione degli eventi input
     socket.on("input", function (data) {
@@ -182,7 +184,7 @@ MongoClient.connect(url, function (err, db) {
           if (res.length > 0) {
             socket.handshake.session.isLogged = true
             socket.handshake.session.save()
-            socket.emit("success", user);
+            socket.emit("success", username);
           } else {
             socket.emit("fail");
           }

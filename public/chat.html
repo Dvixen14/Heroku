@@ -91,6 +91,7 @@
 
 
         // Get elementi
+        var status = element('status');
         var messages = element('messages');
         var textarea = element('textarea');
         var invio = element('invio');
@@ -100,7 +101,19 @@
 
         console.log(username)
 
-    
+        // Stati di default
+        var statusDefault = status.textContent;
+
+        var setStatus = function (s) {
+            // Set status
+            status.textContent = s;
+
+            if (s !== statusDefault) {
+                var delay = setTimeout(function () {
+                    setStatus(statusDefault);
+                }, 4000);
+            }
+        }
 
         // Connessione a socket.io
         var socket = io.connect('https://mongodbchatinfo.herokuapp.com', { transports: ['websocket'], secure: true });
@@ -143,6 +156,17 @@
                 }
             });
 
+            // Get status dal server
+            socket.on('status', function (data) {
+                // Get message status
+                setStatus((typeof data === 'object') ? data.message : data);
+
+                // If status is clear, clear text
+                if (data.clear) {
+                    textarea.value = '';
+                }
+
+            });
             // Gestione Input
 
             invio.addEventListener('click', function () {
