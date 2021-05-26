@@ -55,8 +55,10 @@ app.get('/logout', (req, res) => {
 
 app.get('/chat', (req, res) => {
   if (req.session.isLogged) {
+    console.log(req.session.isLogged);
     res.sendFile('/public/chat.html', { root: __dirname });
   } else {
+    console.log(req.session.isLogged);
     res.sendFile('/public/error.html', { root: __dirname });
   }
 })
