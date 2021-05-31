@@ -1,6 +1,7 @@
 var port = process.env.PORT || 8000;
 const MongoClient = require("mongodb").MongoClient;
-const MongoStore = require('connect-mongo');
+const MongoStore = require("connect-mongo");
+const bcrypt = require("bcryptjs");
 const express = require("express");
 const app = express();
 const http = require("http");
@@ -16,12 +17,10 @@ var session = require("express-session")({
       dbName: 'mongochat'
     })*/
 });
-const { v4: uuidv4 } = require('uuid');
+const { v4: uuidv4 } = require("uuid");
 // uuidv4(); // ⇨ '1b9d6bcd-bbfd-4b2d-9b5d-ab8dfbbd4bed'
 
 var sharedsession = require("express-socket.io-session");
-
-
 
 const cors = require("cors");
 const client = require("socket.io")(server, {
@@ -33,44 +32,43 @@ const client = require("socket.io")(server, {
 var url =
   "mongodb+srv://Davide:Y8jM2TdXWRs6aqZ@testcluster1.1p780.mongodb.net/mongochat";
 
-client.use(sharedsession(session, {
-  autoSave: true
-}));
+client.use(
+  sharedsession(session, {
+    autoSave: true,
+  })
+);
 
-app.use(session)
-
+app.use(session);
 
 app.use("/", express.static(__dirname + "/public"));
 
-app.get('/login', (req, res) => {
-  res.sendFile('/public/login.html', { root: __dirname });
+app.get("/login", (req, res) => {
+  res.sendFile("/public/login.html", { root: __dirname });
   console.log(req.session.id);
+});
 
-})
-
-app.get('/logout', (req, res) => {
-  res.sendFile('/public/login.html', { root: __dirname });
+app.get("/logout", (req, res) => {
+  res.sendFile("/public/login.html", { root: __dirname });
   req.session.destroy();
-})
+});
 
-app.get('/chat', (req, res) => {
+app.get("/chat", (req, res) => {
   if (req.session.isLogged) {
     console.log(req.session.isLogged);
-    res.sendFile('/public/chat.html', { root: __dirname });
+    res.sendFile("/public/chat.html", { root: __dirname });
   } else {
     console.log(req.session.isLogged);
-    res.sendFile('/public/error.html', { root: __dirname });
+    res.sendFile("/public/error.html", { root: __dirname });
   }
-})
+});
 
-app.get('/index', (req, res) => {
-  res.sendFile('/public/index.html', { root: __dirname });
-})
+app.get("/index", (req, res) => {
+  res.sendFile("/public/index.html", { root: __dirname });
+});
 
-app.get('/register', (req, res) => {
-  res.sendFile('/public/register.html', { root: __dirname });
-})
-
+app.get("/register", (req, res) => {
+  res.sendFile("/public/register.html", { root: __dirname });
+});
 
 // Connessione a MongoDB
 MongoClient.connect(url, function (err, db) {
@@ -113,7 +111,6 @@ MongoClient.connect(url, function (err, db) {
       // Controlla nome e messaggio
       if (message == "") {
         // Send error status
-
       } else {
         // Inserimento messaggio
 
@@ -133,16 +130,24 @@ MongoClient.connect(url, function (err, db) {
     });
 
     socket.on("submit_register", function (data) {
-      let user = data.username;
-      let mail = data.email;
-      let pwd = data.password;
-
-      users.insertOne(
-        { username: user, email: mail, password: pwd },
-        function () {
-          console.log("utente registrato...");
+      bcrypt.hash(data.password, 10, function (err, hashedPass) {
+        if (err) {
+          res.json({
+            error: err,
+          });
         }
-      );
+
+        let user = data.username;
+        let mail = data.email;
+        let pwd = hashedPass;
+        console.log(pwd);
+        users.insertOne(
+          { username: user, email: mail, password: pwd },
+          function () {
+            console.log("utente registrato...");
+          }
+        );
+      });
     });
 
     socket.on("check_users", function (data) {
@@ -171,22 +176,21 @@ MongoClient.connect(url, function (err, db) {
       //console.log(password);
 
       users
-        .find({
-          $or: [
-            { $and: [{ username: username }, { password: password }] },
-            { $and: [{ email: username }, { password: password }] },
-          ],
-        })
-        .toArray(function (err, res) {
-          if (err) {
-            throw err;
-          }
-          if (res.length > 0) {
-            socket.handshake.session.isLogged = true
-            socket.handshake.session.save()
-            socket.emit("success", user);
-          } else {
-            socket.emit("fail");
+        .findOne({ $or: [{ username: username }, { email: username }] })
+        .then((user) => {
+          if (user) {
+            bcrypt.compare(password, user.password, function (err, result) {
+              if (err) {
+                throw err;
+              }
+              if (result) {
+                socket.handshake.session.isLogged = true;
+                socket.handshake.session.save();
+                socket.emit("success", user);
+              } else {
+                socket.emit("fail");
+              }
+            });
           }
         });
     });
