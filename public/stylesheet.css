@@ -192,9 +192,8 @@ font-size: 1.5rem;
   background-color: var(--secondary);
 }
 @media (max-width: 430px) {
-  #logo {
-    padding-top: 1rem;
-    font-size: 1.2rem;
+  #logo_title {
+    font-size: 6.5vw;
   }
 }
 @media (max-width: 768px) {
@@ -202,7 +201,7 @@ font-size: 1.5rem;
     height: 400px;
   }
   .error_text {
-    font-size: 5vh;
+    font-size: 4.5vh;
   }
 }
 
@@ -251,8 +250,8 @@ font-size: 1.5rem;
 }
 
 .error_text{
-  font-size: 5vh;
-  padding-top: 12vh;
+  font-size: 4vh;
+  padding-top: 10vh;
 }
 
 
