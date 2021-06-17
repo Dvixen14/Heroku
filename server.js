@@ -1,3 +1,11 @@
+if(process.env.NODE_ENV === 'production') {
+  app.use((req, res, next) => {
+    if (req.header('x-forwarded-proto') !== 'https')
+      res.redirect(`https://${req.header('host')}${req.url}`)
+    else
+      next()
+  })
+}
 var port = process.env.PORT || 8000;
 const MongoClient = require("mongodb").MongoClient;
 const MongoStore = require("connect-mongo");
@@ -21,7 +29,6 @@ const { v4: uuidv4 } = require("uuid");
 // uuidv4(); // ⇨ '1b9d6bcd-bbfd-4b2d-9b5d-ab8dfbbd4bed'
 
 var sharedsession = require("express-socket.io-session");
-
 const cors = require("cors");
 const client = require("socket.io")(server, {
   cors: {
@@ -37,6 +44,7 @@ client.use(
     autoSave: true,
   })
 );
+
 
 app.use(session);
 
