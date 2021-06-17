@@ -88,7 +88,7 @@
         var element = function (id) {
             return document.getElementById(id);
         }
-
+        
 
         // Get elementi
         var status = element('status');
@@ -98,6 +98,12 @@
         var username = sessionStorage.getItem("user");
         document.getElementById("utente").innerHTML = sessionStorage.getItem("user");
         var clearBtn = element('clear');
+
+        if(sessionStorage.getItem("user") == "Davide"){
+            clearBtn.style.display = "block"
+        } else{ 
+            clearBtn.style.display = "none"
+        }
 
         console.log(username)
 
@@ -117,6 +123,8 @@
 
         // Connessione a socket.io
         var socket = io.connect('https://mongodbchatinfo.herokuapp.com', { transports: ['websocket'], secure: true });
+        // localhost:8000
+		// https://mongodbchatinfo.herokuapp.com
 
         // Controlla per la connessione
         if (socket !== undefined) {
