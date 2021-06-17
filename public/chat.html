@@ -78,7 +78,7 @@
                 </div>
             </div>
         </div>
-        <button id="clear" class="btn btn-danger mx-auto d-block">Clear</button>
+        <button id="clear" class="btn btn-danger mx-auto">Clear</button>
     </div>
 </body>
 
@@ -98,8 +98,7 @@
         var username = sessionStorage.getItem("user");
         document.getElementById("utente").innerHTML = sessionStorage.getItem("user");
         var clearBtn = element('clear');
-
-        if(sessionStorage.getItem("user") == "Davide"){
+        if( username == "Davide"){
             clearBtn.style.display = "block"
         } else{ 
             clearBtn.style.display = "none"
