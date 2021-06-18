@@ -198,7 +198,8 @@ MongoClient.connect(url, function (err, db) {
                 socket.emit("fail");
               }
             });
-          }
+          }else {
+            socket.emit("fail");}
         });
     });
   });
