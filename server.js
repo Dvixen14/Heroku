@@ -183,7 +183,7 @@ MongoClient.connect(url, function (err, db) {
       //console.log(password);
 
       users
-        .findOne({ $or: [{ username: username }, { email: username }] })
+        .findOne({ username: username })
         .then((user) => {
           if (user) {
             bcrypt.compare(password, user.password, function (err, result) {
